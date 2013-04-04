@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
+		<meta name="description" content="A little web comic" />
+		<meta name="keywords" content="little, monks, webcomic, Myrjam, Van de Vijver" />
+		<meta name="author" content="Myrjam Van de Vijver" />
+		<title>The Little Monks</title>
+		<link rel="stylesheet" href="static/style.css" />
+		<script type="text/javascript" src="static/jquery.js"></script>
+		<script type="text/javascript" src="static/jquery-scrollTo.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('a[rel="_blank"]').each(function(){
+					$(this).click(function(e){
+						window.open($(this).attr('href'));
+						return false;
+					});
+				});
+				{% block jquery %}
+				{% endblock %}
+			});
+		</script>
+	</head>
+	<body>
+		<div class="header"><img src="static/banner.png" alt="The most badass banner evah" /></div>
+		<div class="links">
+			<div class="home"><a href="/"><img src="static/home.png" alt="Home" width="40" height="40" title="Home" /></a></div>
+			<div class="about"><a href="about"><img src="static/about.png" alt="About the author" width="40" height="40" title="About the author" /></a></div>
+			<div class="ab_monks"><a href="about_monks"><img src="static/ab_monks.png" alt="About the Monks" width="40" height="40" title="About the Monks" /></a></div>
+			<div class="rss"><a href="rss"><img src="static/rss2.png" alt="RSS Feed" width="40" height="40" title="RSS Feed" /></a></div>
+			<div class="contact"><a href="contact"><img src="static/contact.png" alt="Contact" width="40" height="40" title="Contact" /></a></div>
+			<div class="share">
+				<a href="http://"><img src="static/facebook.png" alt="Follow The Little Monks on Facebook" width="20" height="20" title="Follow The Little Monks on Facebook" /></a>
+				<a href="http://"><img src="static/twitter.png" alt="Follow The Little Monks on Twitter" width="20" height="20" title="Follow The Little Monks on Twitter" /></a>
+				<a href="http://"><img src="static/googleplus.png" alt="Follow The Little Monks on Google+" width="20" height="20" title="Follow The Little Monks on Google+" /></a>
+			</div>
+		</div>
+		{% block content %}
+		{% endblock %}
+		<div class="footer"></div>
+	</body>
+</html>

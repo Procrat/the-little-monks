@@ -1,0 +1,24 @@
+application: thelittlemonks
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /static
+  static_dir: static
+
+- url: /manage
+  script: request_handler.app
+  secure: always
+  login: admin
+ 
+- url: /_ah/login_required
+  script: request_handler.app
+
+- url: /.*
+  script: request_handler.app
+
+libraries:
+- name: django
+  version: "1.4"

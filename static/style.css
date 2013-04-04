@@ -1,0 +1,120 @@
+@font-face {
+	font-family: Amatic;
+	src: url('../static/Amatic.ttf');
+}
+
+@font-face {
+	font-family: ie-Amatic;
+	src: url('../static/Amatic.eot');
+}
+
+body {
+	margin: 0px auto;
+	max-width: 800px;
+	background-color: gray;
+	font-family: ie-Amatic, Amatic, sans-serif;
+	font-size: x-large;
+}
+
+a img {
+	border: none;
+}
+
+.header {
+	height: 150px;
+	background-color: gray;
+}
+
+.links {
+	height: 50px;
+	background-color: white;
+	border-bottom: 2px solid black;
+	padding: 5px 0px;
+	margin-bottom: 10px;
+	-webkit-border-bottom-right-radius: 20px;
+	-webkit-border-bottom-left-radius: 20px;
+	-moz-border-radius-bottomright: 20px;
+	-moz-border-radius-bottomleft: 20px;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+}
+
+.home, .about, .ab_monks, .contact, .rss {
+	float: left;
+	padding: 5px;
+	padding-left: 20px;
+}
+
+.share {
+	float: right;
+	padding: 5px;
+	padding-right: 20px;
+}
+
+.bordered {
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	background-color: white;
+	padding: 15px;
+	margin: 10px 0px;
+}
+
+.comic {
+	overflow: hidden;
+}
+
+.upper_nav, .lower_nav {
+	max-width: 200px;
+	height: 50px;
+}
+
+.upper_nav {
+	clear: both;
+	float: left;
+}
+
+.lower_nav {
+	float: right;
+}
+
+.first, .prev, .next, .last {
+	float: left;
+	padding: 4px;
+}
+
+.title {
+	clear: both;
+	text-align: center;
+	font-size: 2em;
+	position: relative;
+	z-index: 5;
+}
+
+.pic {
+	margin-top: -30px;
+	margin-left: -15px;
+}
+
+.comic_share {
+	float: left;
+}
+
+.comic_share img {
+	padding: 4px;
+}
+
+.comments {
+	clear: both;
+}
+
+.comments-title {
+	font-size: 1.6em;
+	text-align: center;
+	cursor: pointer;
+	cursor: hand;
+}
+
+#disqus_thread {
+	padding: 10px;
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
+		<title>The Little Monks - Dem monks</title>
+	</head>
+	<body>
+		<div style="float:right">
+			<form method="get" action="{{ logout_url }}">
+				<input type="submit" value="Logout" />
+			</form>
+		</div>
+
+		<h2>Add monk</h2>
+		<form enctype="multipart/form-data" method="post" action="{{ upload_url }}"><p>
+			<input type="hidden" name="action" value="add" />
+			<input type="file" name="image" />
+			<input type="text" name="title" />
+			<input type="submit" value="Add comic" />
+		</p></form>
+		<hr />
+		<h2>Modify monks</h2>
+		<ol>{% for i, title in comics %}
+			<li style="list-style-type: none">
+				{{ i }}. {{ title }}
+				<br />
+				<form enctype="multipart/form-data" method="post" action="manage">
+					<input type="hidden" name="action" value="rename" />
+					<input type="hidden" name="nr" value="{{ i }}" />
+					<input type="text" name="name" />
+					<input type="submit" value="Rename" />
+				</form>
+				<br />
+				<form enctype="multipart/form-data" method="post" action="{{ upload_url }}">
+					<input type="hidden" name="action" value="change_image" />
+					<input type="hidden" name="nr" value="{{ i }}" />
+					<input type="file" name="image" />
+					<input type="submit" value="Change Image" />
+				</form>
+			</li>
+		{% endfor %}</ol>
+	</body>
+</html>
