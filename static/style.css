@@ -13,7 +13,7 @@ body {
 	max-width: 800px;
 	background-color: gray;
 	font-family: ie-Amatic, Amatic, sans-serif;
-	font-size: x-large;
+	font-size: 1.3em;
 }
 
 a img {
@@ -51,7 +51,9 @@ a img {
 	padding-right: 20px;
 }
 
-.bordered {
+.bordered,
+.monk,
+#monk-selection {
 	-webkit-border-radius: 20px;
 	-moz-border-radius: 20px;
 	border-radius: 20px;
@@ -60,6 +62,7 @@ a img {
 	margin: 10px 0px;
 }
 
+/* Main (comic) page */
 .comic {
 	overflow: hidden;
 }
@@ -117,4 +120,37 @@ a img {
 
 #disqus_thread {
 	padding: 10px;
+}
+
+
+/* About monks page */
+#monk-selection {
+	padding: 5px;
+}
+#monk-selection table {
+	width: 100%;
+	text-align: center;
+	font-size: 1.3em;
+}
+#monk-selection td {
+	cursor: pointer;
+	cursor: hand;
+}
+
+.monk-name,
+.monk-desc,
+.monk-age,
+.monk-quote,
+.monk-ref {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	background-color: lightgray;
+	padding: 5px;
+	margin: 5px;
+	display: inline-block;
+}
+
+.monk-name {
+	font-size: 1.4em;
 }

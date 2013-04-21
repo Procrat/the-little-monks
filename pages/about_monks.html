@@ -1,45 +1,87 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="bordered">
-Adelmar
-Adelmar is the architect and the artistic soul. He has a strong bipolar disposition, being manic at one time and depressed some hours later. He sees signs and deeper meanings everywhere but his fellow monks don't tend to appreciate his view on life, the universe and everything. He keeps trying, not aware of their annoyance and living in his own little world. Adelmar likes the infinite and always changing beauty of the nature and hates purely pragmatic souls.
-Age: 30-something
-19-5; 19-6; 20-3-8
-Dagmar
-The evil professor Dagmar plotting and scheming to rule the world and be the new God of the little monks. He comes from a family of evil professors and has inherited his evilness from both his parents who tragicallly died in the attempt to overtake the world. Dagmar loves maniacal laughter and gets all warm inside from the sight of fluffy baby rabbits. He's really scared of spiders (but don't tell anyone!) and has a deep hate for democracy.
-Age: 40-something
-Favorite quote: "Mwahahaha!"
-13-5
-Danny
-Danny is a absentminded boy who's always thinking about the most crazy stuff ever. Apart from not knowing the difference between right and left, he has the unusual ability to get into the worst kind of trouble without even trying. Thankfully, he also has the great skill to get out of the most desperate situations by accident. He seems quite shy and asocial but in reality he's just to busy dreaming about random stuff to pay attention to what is going on around him. Danny is a peaceful guy who likes everything and everyone. Especially cupcakes. He loves cupcakes.
-Age: 19
-Favorite quote: "What did you say?"
-3-5; 14-?
-Devon
-Devon is a cheerless and pessimistic little fellow. He is sure that he will die soon, eventhough he seems to keep on living. He does what is asked from him but is also convinced what he does is not helpful or will go badly in some kind of way. When someone tries to cheer him up, they just end up being as depressed as Devon because of his sound proof for the bad things in life. Devon does not really like something, nor does he hate something, expect maybe himself.
-9-?
-Age: 28
-Favorite quote: "We're all going to die!"
-Ferrell
-Ferrell is the self-proclaimed leader of the little monks.He has a tendency towards dictatorial leadership. Though most of the monks don't like him as a leader, no one has the guts to openly challenge him. He's an egocentric asshole that cannot manage to see the point of view of others. He is addicted to power and so he fears to lose it one day. He is kind of paranoia towards others that might be better leaders than he is. Which is pretty much everyone but he fails to see that due to his narsistic disposition.
-Age: 60 something
-Favorite quote: "Because I said so!
-10-5
-Fred
-Fred is the biggest funnypants of the little monks. He likes to trick other people and has a particularly good sense on how and when to pull of a pratical joke. Strangely, he loathe other people who try to pull a practical joke on him. Mostly he is faster than the others but when someone can trick him, he becomes annoyed and tetchy. He WILL take a revanche one day, and the smartass who tried to trick him WILL regret it.
-Other than that, Fred is a quite enjoyable person, sometimes. When he has a good day. Once in a month or so. With only a select amount of people.
-Age: 23
-Favorite quote: "Got you, [Insert degrating insult]!"
-16-?
-Mr. Cuddles
-
-Quote: "..."
-Quinn
-His biggest fears are the "thing" in the woods and losing Mr. Cuddles. In reality, however, he is afraid of mostly everything.
-Randal
-Salvador
-Age: Infinity
-Stewart
+<div id="monk-selection">
+	<table>
+		<tr>
+			<td onclick="setTimeout(function(){$('#atoe').fadeIn(300);},300);$('.part').not('#atoe').fadeOut(300);">A-E</td>
+			<td onclick="setTimeout(function(){$('#ftoj').fadeIn(300);},300);$('.part').not('#ftoj').fadeOut(300);">F-J</td>
+			<td onclick="setTimeout(function(){$('#ktoo').fadeIn(300);},300);$('.part').not('#ktoo').fadeOut(300);">K-O</td>
+			<td onclick="setTimeout(function(){$('#ptot').fadeIn(300);},300);$('.part').not('#ptot').fadeOut(300);">P-T</td>
+			<td onclick="setTimeout(function(){$('#utoz').fadeIn(300);},300);$('.part').not('#utoz').fadeOut(300);">U-Z</td>
+			<td onclick="setTimeout(function(){$('.part').fadeIn(300);},300);">All</td>
+		</tr>
+	</table>
 </div>
-{% endblock %}
+<div id="atoe" class="part">
+	<div class="monk">
+		<div class="monk-name">Adelmar</div>
+		<div class="monk-desc">Adelmar is the architect and the artistic soul. He has a strong bipolar disposition, being manic at one time and depressed some hours later. He sees signs and deeper meanings everywhere but his fellow monks don't tend to appreciate his view on life, the universe and everything. He keeps trying, not aware of their annoyance and living in his own little world. Adelmar likes the infinite and always changing beauty of the nature and hates purely pragmatic souls.</div>
+		<div class="monk-age">Age: 30-something</div>
+		<div class="monk-ref">19-5; 19-6; 20-3-8</div>
+	</div>
+	<div class="monk">
+		<div class="monk-name">Dagmar</div>
+		<div class="monk-desc">The evil professor Dagmar plotting and scheming to rule the world and be the new God of the little monks. He comes from a family of evil professors and has inherited his evilness from both his parents who tragicallly died in the attempt to overtake the world. Dagmar loves maniacal laughter and gets all warm inside from the sight of fluffy baby rabbits. He's really scared of spiders (but don't tell anyone!) and has a deep hate for democracy.</div>
+		<div class="monk-age">Age: 40-something</div>
+		<div class="monk-quote">Favorite quote: "Mwahahaha!"</div>
+		<div class="monk-ref">13-5</div>
+	</div>
+	<div class="monk">
+		<div class="monk-name">Danny</div>
+		<div class="monk-desc">Danny is a absentminded boy who's always thinking about the most crazy stuff ever. Apart from not knowing the difference between right and left, he has the unusual ability to get into the worst kind of trouble without even trying. Thankfully, he also has the great skill to get out of the most desperate situations by accident. He seems quite shy and asocial but in reality he's just to busy dreaming about random stuff to pay attention to what is going on around him. Danny is a peaceful guy who likes everything and everyone. Especially cupcakes. He loves cupcakes.</div>
+		<div class="monk-age">Age: 19</div>
+		<div class="monk-quote">Favorite quote: "What did you say?"</div>
+		<div class="monk-ref">3-5; 14-?</div>
+	</div>
+	<div class="monk">
+		<div class="monk-name">Devon</div>
+		<div class="monk-desc">Devon is a cheerless and pessimistic little fellow. He is sure that he will die soon, eventhough he seems to keep on living. He does what is asked from him but is also convinced what he does is not helpful or will go badly in some kind of way. When someone tries to cheer him up, they just end up being as depressed as Devon because of his sound proof for the bad things in life. Devon does not really like something, nor does he hate something, expect maybe himself.</div>
+		<div class="monk-age">Age: 28</div>
+		<div class="monk-quote">Favorite quote: "We're all going to die!"</div>
+		<div class="monk-ref">9-?</div>
+	</div>
+</div>
+<div id="ftoj" class="part">
+	<div class="monk">
+		<div class="monk-name">Ferrell</div>
+		<div class="monk-desc">Ferrell is the self-proclaimed leader of the little monks.He has a tendency towards dictatorial leadership. Though most of the monks don't like him as a leader, no one has the guts to openly challenge him. He's an egocentric asshole that cannot manage to see the point of view of others. He is addicted to power and so he fears to lose it one day. He is kind of paranoia towards others that might be better leaders than he is. Which is pretty much everyone but he fails to see that due to his narsistic disposition.</div>
+		<div class="monk-age">Age: 60 something</div>
+		<div class="monk-quote">Favorite quote: "Because I said so!</div>
+		<div class="monk-ref">10-5</div>
+	</div>
+	<div class="monk">
+		<div class="monk-name">Fred</div>
+		<div class="monk-desc">Fred is the biggest funnypants of the little monks. He likes to trick other people and has a particularly good sense on how and when to pull of a pratical joke. Strangely, he loathe other people who try to pull a practical joke on him. Mostly he is faster than the others but when someone can trick him, he becomes annoyed and tetchy. He WILL take a revanche one day, and the smartass who tried to trick him WILL regret it.<br/>Other than that, Fred is a quite enjoyable person, sometimes. When he has a good day. Once in a month or so. With only a select amount of people.</div>
+		<div class="monk-age">Age: 23</div>
+		<div class="monk-quote">Favorite quote: "Got you, [Insert degrating insult]!"</div>
+		<div class="monk-ref">16-?</div>
+	</div>
+</div>
+<div id="ktoo" class="part">
+	<div class="monk">
+		<div class="monk-name">Mr. Cuddles</div>
+		<div class="monk-desc"></div>
+		<div class="monk-quote">Quote: "..."</div>
+	</div>
+</div>
+<div id="ptot" class="part">
+	<div class="monk">
+		<div class="monk-name">Quinn</div>
+		<div class="monk-desc">His biggest fears are the "thing" in the woods and losing Mr. Cuddles. In reality, however, he is afraid of mostly everything.</div>
+	</div>
+	<div class="monk">
+		<div class="monk-name">Randal</div>
+	</div>
+	<div class="monk">
+		<div class="monk-name">Salvador</div>
+		<div class="monk-age">Age: Infinity</div>
+	</div>
+	<div class="monk">
+		<div class="monk-name">Stewart</div>
+	</div>
+</div>
+<div id="utoz" class="part">
+</div>
+
+{% endblock content %}
