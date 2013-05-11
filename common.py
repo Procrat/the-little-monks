@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import os
 
-from google.appengine.ext import blobstore, db
+from google.appengine.ext import db
 from google.appengine.ext.webapp import template
 
 
@@ -13,7 +13,9 @@ loc = loc_ + '/'
 class Comic(db.Model):
     nr = db.IntegerProperty(required=True)
     title = db.StringProperty(required=True)
-    image_info = blobstore.BlobReferenceProperty(required=True)
+    image = db.BlobProperty(required=True)
+    width = db.IntegerProperty(required=True)
+    height = db.IntegerProperty(required=True)
     comment = db.TextProperty(required=True)
 
 

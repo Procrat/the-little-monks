@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import logging
 import urllib
 
 import webapp2
@@ -18,13 +17,14 @@ class MainPage(webapp2.RequestHandler):
         if nr > latest_nr:
             return self.redirect('/%d' % latest_nr)
         comic = Comic.all().filter('nr =', nr).get()
-        logging.debug('req: %s' % self.request.GET)
         url = loc + str(nr)
         dic = {'comic_nr': nr,
                'latest': latest_nr,
                'title': comic.title,
                'comment': comic.comment,
                'url': url,
+               'comic_width': comic.width,
+               'comic_height': comic.height,
                'share_url': urllib.quote(url, ''),
                'share_title': urllib.quote('The Little Monks')}
         render_page(self, 'home.html', dic)

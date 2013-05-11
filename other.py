@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from google.appengine.ext.webapp import blobstore_handlers
 from webapp2 import RequestHandler
 
 from common import render_page, not_found, Comic
@@ -22,13 +21,14 @@ class ZeroEasterPage(RequestHandler):
     def get(self):
         render_page(self, 'zero.html')
 
-class ImageHandler(blobstore_handlers.BlobstoreDownloadHandler):
+class ImageHandler(RequestHandler):
     def get(self, nr):
         try:
             nr = int(nr)
         except:
             return not_found(self)
         comic = Comic.all().filter('nr =', nr).get()
-        if comic is None or comic.image_info is None:
+        if comic is None or comic.image is None:
             return not_found(self)
-        self.send_blob(comic.image_info)
+        self.response.headers['Content-Type'] = 'image/png'
+        self.response.out.write(comic.image)

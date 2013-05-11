@@ -1,10 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import logging
-
-from google.appengine.api import users
-from google.appengine.ext import blobstore
-from google.appengine.ext.webapp.blobstore_handlers import BlobstoreUploadHandler
+from google.appengine.api import users, images
+from google.appengine.ext import blobstore, db
+from google.appengine.ext.webapp.blobstore_handlers \
+    import BlobstoreUploadHandler
 
 from common import render_page, Comic
 
@@ -46,8 +45,9 @@ class ManagePage(BlobstoreUploadHandler):
             raise ValueError
         latest = Comic.all().order('-nr').get()
         nr = latest.nr + 1 if latest else 1
-        Comic(nr=nr, title=title, image_info=uploads[0].key(),
-                comment=comment).put()
+        (width, height, blob) = handle_image(uploads[0])
+        Comic(nr=nr, title=title, image=blob, width=width, height=height,
+              comment=comment).put()
 
     def remove(self, POST):
         to_del = Comic.all().order('-nr').get()
@@ -68,17 +68,27 @@ class ManagePage(BlobstoreUploadHandler):
         uploads = self.get_uploads('image')
         nr = POST.get('nr')
         comic = Comic.all().filter('nr =', int(nr)).get()
-        logging.debug("%s en %s en %s" % (nr, comic, uploads))
         if comic is None or not uploads:
             raise ValueError
-        comic.image_info = uploads[0].key()
+        (width, height, blob) = handle_image(uploads[0])
+        comic.width = width
+        comic.height = height
+        comic.image = blob
         comic.put()
 
     def change_comment(self, POST):
         nr = POST.get('nr')
-        comment = POST.get(' comment')
+        comment = POST.get('comment')
         comic = Comic.all().filter('nr =', int(nr)).get()
         if comic is None or comment is None:
             raise ValueError
         comic.comment = comment
         comic.put()
+
+
+def handle_image(blob_info):
+    image = images.Image(blob_key=blob_info)
+    image.resize(width=800)
+    image_data = image.execute_transforms(quality=100)
+    blob_info.delete()
+    return (image.width, image.height, db.Blob(image_data))
