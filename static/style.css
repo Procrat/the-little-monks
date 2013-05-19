@@ -39,11 +39,26 @@ a img {
 	border-bottom-left-radius: 20px;
 }
 
-.home, .about, .ab_monks, .contact, .rss {
+.links .link {
 	float: left;
 	padding: 5px;
 	padding-left: 20px;
 }
+.links .link a {
+	width: 60px;
+	height: 40px;
+	display: block;
+	background-position: 0 -40px;
+}
+.links .link a:hover {
+	background-position: 0 0px;
+}
+
+.home a {background-image: url('../static/home.png')}
+.about a {background-image: url('../static/about.png')}
+.ab_monks a {background-image: url('../static/ab_monks.png')}
+.rss a {background-image: url('../static/rss.png')}
+.contact a {background-image: url('../static/contact.png')}
 
 .share {
 	float: right;
@@ -54,6 +69,7 @@ a img {
 .bordered,
 .monk,
 #monk-selection {
+	clear: both;
 	-webkit-border-radius: 20px;
 	-moz-border-radius: 20px;
 	border-radius: 20px;
