@@ -68,6 +68,10 @@ p {
 	margin: 5px;
 }
 
+.disabled {
+	opacity: 0.4;
+}
+
 .center {
 	text-align: center;
 }

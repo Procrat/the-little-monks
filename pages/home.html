@@ -3,10 +3,22 @@
 {% block content %}
 <div class="bordered comic">
 	<div class="upper_nav">
-		<div class="first">{% if comic_nr != 1 %}<a href="1">{% endif %}<img src="static/first.png" alt="First" width="40" height="40" title="First" />{% if comic_nr != 1 %}</a>{% endif %}</div>
-		<div class="prev">{% if comic_nr != 1 %}<a href="{{ comic_nr|add:"-1" }}">{% endif %}<img src="static/previous.png" alt="Previous" width="40" height="40" title="Previous" />{% if comic_nr != 1 %}</a>{% endif %}</div>
-		<div class="next">{% if comic_nr != latest %}<a href="{{ comic_nr|add:"1" }}">{% endif %}<img src="static/next.png" alt="Next" width="40" height="40" title="Next" />{% if comic_nr != latest %}</a>{% endif %}</div>
-		<div class="last">{% if comic_nr != latest %}<a href="{{ latest }}">{% endif %}<img src="static/last.png" alt="Last" width="40" height="40" title="Last" />{% if comic_nr != latest %}</a>{% endif %}</div>
+		<div class="first">
+			{% if comic_nr != 1 %}<a href="1"><img src="static/first.png" alt="First" width="40" height="40" title="First" /></a>
+			{% else %}<img class="disabled" src="static/first.png" alt="First" width="40" height="40" title="First" />{% endif %}
+		</div>
+		<div class="prev">
+			{% if comic_nr != 1 %}<a href="{{ comic_nr|add:"-1" }}"><img src="static/previous.png" alt="Previous" width="40" height="40" title="Previous" /></a>
+			{% else %}<img class="disabled" src="static/previous.png" alt="Previous" width="40" height="40" title="Previous" />{% endif %}
+		</div>
+		<div class="next">
+			{% if comic_nr != latest %}<a href="{{ comic_nr|add:"1" }}"><img src="static/next.png" alt="Next" width="40" height="40" title="Next" /></a>
+			{% else %}<img class="disabled" src="static/next.png" alt="Next" width="40" height="40" title="Next" />{% endif %}
+		</div>
+		<div class="last">
+			{% if comic_nr != latest %}<a href="{{ latest }}"><img src="static/last.png" alt="Last" width="40" height="40" title="Last" /></a>
+			{% else %}<img class="disabled" src="static/last.png" alt="Last" width="40" height="40" title="Last" />{% endif %}
+		</div>
 	</div>
 	<h1>{{ title }}</h1>
 	<div class="pic"><img src="comic/{{ comic_nr }}" alt="{{ comment }}" width="800" height="{% widthratio comic_height comic_width 800 %}" title="{{ comment }}" /></div>
@@ -19,10 +31,22 @@
 		<a href="http://digg.com/submit?&amp;jump=close&amp;url={{ share_url }}&amp;title={{ share_title }}" rel="_blank"><img src="static/digg.png" alt="Share on Digg" width="40" height="40" title="Share on Digg" /></a>
 	</div>
 	<div class="lower_nav">
-		<div class="first">{% if comic_nr != 1 %}<a href="1">{% endif %}<img src="static/first.png" alt="First" width="40" height="40" title="First" />{% if comic_nr != 1 %}</a>{% endif %}</div>
-		<div class="prev">{% if comic_nr != 1 %}<a href="{{ comic_nr|add:"-1" }}">{% endif %}<img src="static/previous.png" alt="Previous" width="40" height="40" title="Previous" />{% if comic_nr != 1 %}</a>{% endif %}</div>
-		<div class="next">{% if comic_nr != latest %}<a href="{{ comic_nr|add:"1" }}">{% endif %}<img src="static/next.png" alt="Next" width="40" height="40" title="Next" />{% if comic_nr != latest %}</a>{% endif %}</div>
-		<div class="last">{% if comic_nr != latest %}<a href="{{ latest }}">{% endif %}<img src="static/last.png" alt="Last" width="40" height="40" title="Last" />{% if comic_nr != latest %}</a>{% endif %}</div>
+		<div class="first">
+			{% if comic_nr != 1 %}<a href="1"><img src="static/first.png" alt="First" width="40" height="40" title="First" /></a>
+			{% else %}<img class="disabled" src="static/first.png" alt="First" width="40" height="40" title="First" />{% endif %}
+		</div>
+		<div class="prev">
+			{% if comic_nr != 1 %}<a href="{{ comic_nr|add:"-1" }}"><img src="static/previous.png" alt="Previous" width="40" height="40" title="Previous" /></a>
+			{% else %}<img class="disabled" src="static/previous.png" alt="Previous" width="40" height="40" title="Previous" />{% endif %}
+		</div>
+		<div class="next">
+			{% if comic_nr != latest %}<a href="{{ comic_nr|add:"1" }}"><img src="static/next.png" alt="Next" width="40" height="40" title="Next" /></a>
+			{% else %}<img class="disabled" src="static/next.png" alt="Next" width="40" height="40" title="Next" />{% endif %}
+		</div>
+		<div class="last">
+			{% if comic_nr != latest %}<a href="{{ latest }}"><img src="static/last.png" alt="Last" width="40" height="40" title="Last" /></a>
+			{% else %}<img class="disabled" src="static/last.png" alt="Last" width="40" height="40" title="Last" />{% endif %}
+		</div>
 	</div>
 </div>
 <div class="bordered comments">
