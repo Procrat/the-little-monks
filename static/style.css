@@ -54,8 +54,14 @@ h1, h2, h3 {
 	z-index: 5;
 	font-family: ie-Amatic, Amatic, sans-serif;
 	text-align: center;
+}
+
+h1 {
 	font-size: 2.6em;
 	padding-bottom: 20px;
+}
+h2 {
+	font-size: 1.8em;
 }
 
 p {
@@ -203,7 +209,7 @@ p {
 	cursor: hand;
 }
 
-.monk-name,
+h2,
 .monk-desc,
 .monk-age,
 .monk-quote,
@@ -215,10 +221,18 @@ p {
 	padding: 5px;
 	margin: 5px;
 	display: inline-block;
+	max-width: 550px;
 }
 
-.monk-name {
-	font-family: ie-Amatic, Amatic, sans-serif;
+.monk-pic {
+	float: left;
+	margin: 20px;
+}
+.monk-pic img {
+	width: 150px;
+	height: 188px;
+}
+
+.monk h2 {
 	padding-top: 0px;
-	font-size: 1.8em;
 }
