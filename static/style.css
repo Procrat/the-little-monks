@@ -8,16 +8,62 @@
 	src: url('../static/Amatic.eot');
 }
 
+@font-face {
+	font-family: MyriadProLight;
+	src: url('../static/MyriadProLight.ttf')
+}
+
+@font-face {
+	font-family: ie-MyriadProLight;
+	src: url('../static/MyriadProLight.eot')
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
 body {
 	margin: 0px auto;
 	max-width: 800px;
 	background-color: gray;
-	font-family: ie-Amatic, Amatic, sans-serif;
-	font-size: 1.3em;
+	font-family: ie-MyriadProLight, MyriadProLight, sans-serif;
 }
 
 a img {
 	border: none;
+}
+
+h1, h2, h3 {
+	clear: both;
+	position: relative;
+	z-index: 5;
+	font-family: ie-Amatic, Amatic, sans-serif;
+	text-align: center;
+	font-size: 2.6em;
+	padding-bottom: 20px;
+}
+
+p {
+	margin: 5px;
+}
+
+.center {
+	text-align: center;
 }
 
 .header {
@@ -95,6 +141,8 @@ a img {
 
 .lower_nav {
 	float: right;
+	position: relative;
+	z-index: 5;
 }
 
 .first, .prev, .next, .last {
@@ -102,25 +150,20 @@ a img {
 	padding: 4px;
 }
 
-.title {
-	clear: both;
-	text-align: center;
-	font-size: 2em;
-	position: relative;
-	z-index: 5;
-}
-
 .pic {
-	margin-top: -30px;
+	margin-top: -50px;
 	margin-left: -15px;
+	margin-bottom: -30px;
 }
 
 .comic_share {
 	float: left;
+	position: relative;
+	z-index: 5;
 }
 
 .comic_share img {
-	padding: 4px;
+	margin: 4px;
 }
 
 .comments {
@@ -128,10 +171,15 @@ a img {
 }
 
 .comments-title {
-	font-size: 1.6em;
-	text-align: center;
 	cursor: pointer;
 	cursor: hand;
+}
+.comments-title img {
+	margin-top: 7px;
+}
+.comments-title h1 {
+	clear: none;
+	padding-bottom: 10px;
 }
 
 #disqus_thread {
@@ -146,7 +194,9 @@ a img {
 #monk-selection table {
 	width: 100%;
 	text-align: center;
-	font-size: 1.3em;
+	font-family: ie-Amatic, Amatic, sans-serif;
+	margin-top: -5px;
+	font-size: 1.8em;
 }
 #monk-selection td {
 	cursor: pointer;
@@ -168,5 +218,7 @@ a img {
 }
 
 .monk-name {
-	font-size: 1.4em;
+	font-family: ie-Amatic, Amatic, sans-serif;
+	padding-top: 0px;
+	font-size: 1.8em;
 }

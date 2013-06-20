@@ -8,7 +8,7 @@
 		<div class="next">{% if comic_nr != latest %}<a href="{{ comic_nr|add:"1" }}">{% endif %}<img src="static/next.png" alt="Next" width="40" height="40" title="Next" />{% if comic_nr != latest %}</a>{% endif %}</div>
 		<div class="last">{% if comic_nr != latest %}<a href="{{ latest }}">{% endif %}<img src="static/last.png" alt="Last" width="40" height="40" title="Last" />{% if comic_nr != latest %}</a>{% endif %}</div>
 	</div>
-	<div class="title">{{ title }}</div>
+	<h1>{{ title }}</h1>
 	<div class="pic"><img src="comic/{{ comic_nr }}" alt="{{ comment }}" width="800" height="{% widthratio comic_height comic_width 800 %}" title="{{ comment }}" /></div>
 	<div class="comic_share">
 		<a href="http://twitter.com/share?url={{ share_url }}&amp;hashtags=TheLittleMonks,FuckingHilarious" rel="_blank"><img src="static/twitter.png" alt="Share on Twitter" width="40" height="40" title="Share on Twitter" /></a>
@@ -28,8 +28,8 @@
 <div class="bordered comments">
 	<div class="comments-title">
 		<img src="static/down.png" alt="Down" style="float:left" />
-		Comments
 		<img src="static/down.png" alt="Down" style="float:right" />
+		<h1>Comments</h1>
 	</div>
 	<div id="disqus_thread"></div>
 	<script type="text/javascript">
