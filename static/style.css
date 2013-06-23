@@ -37,6 +37,8 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	vertical-align: baseline;
 }
 
+/* TAG STYLES */
+
 body {
 	margin: 0px auto;
 	max-width: 800px;
@@ -68,6 +70,8 @@ p {
 	margin: 5px;
 }
 
+/* COMMON STYLES */
+
 .disabled {
 	opacity: 0.4;
 }
@@ -75,6 +79,14 @@ p {
 .center {
 	text-align: center;
 }
+
+.hide {
+	position: absolute !important;
+	top: -9999px !important;
+	left: -9999px !important;
+}
+
+/* SPECIFIC STYLES */
 
 .header {
 	height: 150px;
@@ -192,10 +204,6 @@ p {
 	padding-bottom: 10px;
 }
 
-#disqus_thread {
-	padding: 10px;
-}
-
 
 /* About monks page */
 #monk-selection {
@@ -214,6 +222,7 @@ p {
 }
 
 h2,
+.monk-pic,
 .monk-desc,
 .monk-age,
 .monk-quote,
