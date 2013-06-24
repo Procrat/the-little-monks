@@ -69,7 +69,7 @@
 {% endblock content %}
 
 {% block jquery %}
-if (typeof $.cookie('autoscroll') !== 'undefined') {
+if ($.cookie('autoscroll') != undefined) {
   $.removeCookie('autoscroll');
   $(window).scrollTop($('.comic').position().top);
 }
