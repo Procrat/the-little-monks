@@ -69,6 +69,15 @@
 {% endblock content %}
 
 {% block jquery %}
+if (typeof $.cookie('autoscroll') !== 'undefined') {
+  $.removeCookie('autoscroll');
+  $(window).scrollTop($('.comic').position().top);
+}
+
+$('.lower_nav a, .upper_nav a').click(function() {
+  $.cookie('autoscroll', 'yep');
+});
+
 var $title = $('.comments-title');
     $comments = $('#disqus_thread'),
     visible = false;
