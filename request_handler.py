@@ -13,7 +13,7 @@ pages = [('0', other.ZeroEasterPage),
          ('manage', admin.ManagePage),
          ('manage_monks', monks.ManageMonksPage),
          ('_ah/login_required\?continue=(.*)', login.LoginPage),
-#         ('rss', rss.RSSPage),
+         ('rss', other.RSSPage),
          ('.*', other.NotFoundPage)]
 
 app = webapp2.WSGIApplication([('/' + x, y) for (x, y) in pages], debug=True)

@@ -17,6 +17,7 @@ class Comic(db.Model):
     width = db.IntegerProperty(required=True)
     height = db.IntegerProperty(required=True)
     comment = db.TextProperty(required=True)
+    pub_date = db.DateTimeProperty(auto_now_add=True)
 
 
 def render_page(req_handler, filename, template_dict={}):
