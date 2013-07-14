@@ -29,3 +29,8 @@ def render_page(req_handler, filename, template_dict={}):
 def not_found(req_handler):
     req_handler.error(404)
     render_page(req_handler, 'notfound.html')
+
+
+def error(req_handler, msg):
+    req_handler.error(405)
+    render_page(req_handler, 'error.html', {'error_msg': msg})
