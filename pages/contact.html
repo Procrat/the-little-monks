@@ -3,7 +3,13 @@
 {% block extra_headers %}
 <script src="static/jquery.validate.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
-	$('form.contact').validate();
+	$(document).ready(function(){
+		$('form.contact').validate({
+			rules: {
+				email: { email: true }
+			}
+		});
+	});
 </script>
 {% endblock extra_headers %}
 
@@ -13,12 +19,24 @@
 	<form class="contact" action="contact" method="post">
 		<table>
 			<tr>
+				<th>Name</th>
+				<td><input type="text" name="name" required="required" /></td>
+			</tr>
+			<tr>
 				<th>Email address</th>
 				<td><input type="text" name="email" required="required" /></td>
 			</tr>
 			<tr>
+				<th>Subject</th>
+				<td><input type="text" name="subject" required="required" /></td>
+			</tr>
+			<tr>
 				<th>Comment</th>
 				<td><textarea name="comment" rows="4" cols="*" required="required"></textarea></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="Send" /></td>
 			</tr>
 		</table>
 	</form>
