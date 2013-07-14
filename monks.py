@@ -9,16 +9,3 @@ from common import render_page
 class AboutMonksPage(RequestHandler):
     def get(self):
         render_page(self, 'about_monks.html')
-
-class ManageMonksPage(RequestHandler):
-    def get(self):
-        monks = []
-        dic = {}
-        render_page(self, 'manage_monks.html', dic)
-
-class Monk(db.Model):
-    name = db.StringProperty(required=True)
-    description = db.TextProperty(required=True)
-    age = db.StringProperty(required=True)
-    image_info = blobstore.BlobReferenceProperty(required=True)
-    quote = db.StringProperty()
