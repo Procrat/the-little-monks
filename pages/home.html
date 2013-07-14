@@ -1,5 +1,44 @@
 {% extends "base.html" %}
 
+{% block extra_headers %}
+<script type="text/javascript" src="static/jquery.smooth-scroll.min.js"></script>
+<script type="text/javascript" src="static/jquery.cookie.js"></script>
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function(){
+		if ($.cookie('autoscroll') != undefined) {
+			$.removeCookie('autoscroll');
+			$(window).scrollTop($('.comic').position().top);
+		}
+
+		$('.lower_nav a, .upper_nav a').click(function() {
+			$.cookie('autoscroll', 'yep');
+		});
+
+		var $title = $('.comments-title');
+				$comments = $('#disqus_thread'),
+				visible = false;
+
+		$title.click(function() {
+			if (visible) {
+				$comments.slideUp('fast',function() {
+					$comments.addClass('hide')
+									 .slideDown(0)
+									 .css('padding-top', '0px');
+				});
+			} else {
+				$comments.slideUp(0,function() {
+					$comments.removeClass('hide')
+									 .slideDown('fast')
+									 .css('padding-top', '10px');
+					$.smoothScroll({scrollTarget: $title});
+				});
+			}
+			visible = !visible;
+		});
+	});
+</script>
+{% endblock extra_headers %}
+
 {% block content %}
 <div class="bordered comic">
 	<div class="upper_nav">
@@ -59,36 +98,3 @@
 	<noscript><p>Please enable JavaScript to view the comments.</p></noscript>
 </div>
 {% endblock content %}
-
-{% block jquery %}
-if ($.cookie('autoscroll') != undefined) {
-  $.removeCookie('autoscroll');
-  $(window).scrollTop($('.comic').position().top);
-}
-
-$('.lower_nav a, .upper_nav a').click(function() {
-  $.cookie('autoscroll', 'yep');
-});
-
-var $title = $('.comments-title');
-    $comments = $('#disqus_thread'),
-    visible = false;
-
-$title.click(function() {
-  if (visible) {
-    $comments.slideUp('fast',function() {
-      $comments.addClass('hide')
-               .slideDown(0)
-               .css('padding-top', '0px');
-    });
-  } else {
-    $comments.slideUp(0,function() {
-      $comments.removeClass('hide')
-               .slideDown('fast')
-               .css('padding-top', '10px');
-      $.smoothScroll({scrollTarget: $title});
-    });
-  }
-  visible = !visible;
-});
-{% endblock jquery %}

@@ -1,7 +1,26 @@
 {% extends "base.html" %}
 
+{% block extra_headers %}
+<script src="static/jquery.validate.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+	$('form.contact').validate();
+</script>
+{% endblock extra_headers %}
+
 {% block content %}
 <div class="bordered">
-	Contact...
+	<h1>Contact</h1>
+	<form class="contact" action="contact" method="post">
+		<table>
+			<tr>
+				<th>Email address</th>
+				<td><input type="text" name="email" required="required" /></td>
+			</tr>
+			<tr>
+				<th>Comment</th>
+				<td><textarea name="comment" rows="4" cols="*" required="required"></textarea></td>
+			</tr>
+		</table>
+	</form>
 </div>
 {% endblock content %}
