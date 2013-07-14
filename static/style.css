@@ -88,12 +88,12 @@ p {
 
 /* SPECIFIC STYLES */
 
-.header {
+#header {
 	height: 150px;
 	background-color: gray;
 }
 
-.links {
+#links {
 	height: 50px;
 	background-color: white;
 	border-bottom: 2px solid black;
@@ -107,32 +107,45 @@ p {
 	border-bottom-left-radius: 20px;
 }
 
-.links .link {
+#internal {
 	float: left;
 	padding: 5px;
 	padding-left: 20px;
 }
-.links .link a {
-	width: 60px;
-	height: 40px;
-	display: block;
-	background-position: 0 -40px;
-}
-.links .link a:hover {
-	background-position: 0 0px;
-}
 
-.home a {background-image: url('../static/home.png')}
-.about a {background-image: url('../static/about.png')}
-.ab_monks a {background-image: url('../static/ab_monks.png')}
-.rss a {background-image: url('../static/rss.png')}
-.contact a {background-image: url('../static/contact.png')}
-
-.share {
+#external {
 	float: right;
 	padding: 5px;
 	padding-right: 20px;
 }
+
+#links a {
+	display: inline-block;
+	background-position: 0 -100%;
+}
+#links a:hover {
+	background-position: 0 0;
+}
+#internal a {
+	width: 60px;
+	height: 40px;
+}
+#external a {
+	width: 20px;
+	height: 20px;
+	background-size: 100%;
+}
+
+a#home {background-image: url('../static/home.png')}
+a#about {background-image: url('../static/about.png')}
+a#ab_monks {background-image: url('../static/ab_monks.png')}
+a#rss {background-image: url('../static/rss.png')}
+a#contact {background-image: url('../static/contact.png')}
+
+a.facebook{background-image: url('../static/facebook.png')}
+a.twitter{background-image: url('../static/twitter.png')}
+a.googleplus{background-image: url('../static/googleplus.png')}
+
 
 .bordered,
 .monk,
@@ -151,11 +164,6 @@ p {
 	overflow: hidden;
 }
 
-.upper_nav, .lower_nav {
-	max-width: 200px;
-	height: 50px;
-}
-
 .upper_nav {
 	clear: both;
 	float: left;
@@ -167,10 +175,37 @@ p {
 	z-index: 5;
 }
 
+.upper_nav,
+.lower_nav {
+	max-width: 200px;
+	height: 50px;
+}
+
 .first, .prev, .next, .last {
 	float: left;
 	padding: 4px;
 }
+
+.upper_nav a,
+.lower_nav a {
+	width: 40px;
+	height: 40px;
+	display: block;
+	background-position: 0 -40px;
+}
+.upper_nav a:hover,
+.lower_nav a:hover {
+	background-position: 0 0px;
+}
+.upper_nav a.disabled,
+.lower_nav a.disabled {
+	background-position: 0 -40px;
+}
+
+.first a {background-image: url('../static/first.png')}
+.prev a {background-image: url('../static/previous.png')}
+.next a {background-image: url('../static/next.png')}
+.last a {background-image: url('../static/last.png')}
 
 .pic {
 	margin-top: -50px;
@@ -184,9 +219,20 @@ p {
 	z-index: 5;
 }
 
-.comic_share img {
+.comic_share a {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
 	margin: 4px;
+	background-position: 0 40px;
 }
+.comic_share a:hover {
+	background-position: 0 0;
+}
+
+a.reddit {background-image: url('../static/reddit.png')}
+a.tumblr {background-image: url('../static/tumblr.png')}
+a.digg {background-image: url('../static/digg.png')}
 
 .comments {
 	clear: both;
