@@ -157,6 +157,7 @@ a.googleplus{background-image: url('../static/googleplus.png')}
 	background-color: white;
 	padding: 15px;
 	margin: 10px 0px;
+	overflow: hidden;
 }
 
 /* Main (comic) page */
@@ -269,6 +270,18 @@ a.digg {background-image: url('../static/digg.png')}
 	cursor: hand;
 }
 
+.monk {
+	position: relative;
+	min-height: 208px;
+}
+
+.monk-right {
+	float: left;
+	position: relative;
+	left: 190px;
+	width: 550px;
+}
+
 h2,
 .monk-desc,
 .monk-age,
@@ -286,7 +299,9 @@ h2,
 
 .monk-pic {
 	float: left;
-	margin: 20px;
+	position: absolute;
+	margin: -94px 20px 10px 20px;
+	top: 50%;
 }
 .monk-pic img {
 	width: 150px;
