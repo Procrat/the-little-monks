@@ -6,6 +6,18 @@
   <head>
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
     <title>The Little Monks</title>
+    <style type="text/css">
+      .veld {
+         border: 1px solid black;
+         padding: 10px;
+      }
+      tr {
+        border: 1px solid black;
+      }
+      table {
+        border-collapse: collapse;
+      }
+  </style>
   </head>
   <body>
     <div style="float:right">
@@ -35,7 +47,7 @@
         <tr>
           <td>{{ i }}.</td>
           <td>{{ title }}</td>
-          <td>
+          <td class="veld">
             <form enctype="multipart/form-data" method="post" action="manage">
               <input type="hidden" name="action" value="rename" />
               <input type="hidden" name="nr" value="{{ i }}" />
