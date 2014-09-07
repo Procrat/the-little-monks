@@ -56,7 +56,11 @@
     </div>
   </div>
   <h1>{{ title }}</h1>
-  <div class="pic"><img src="comic/{{ comic_nr }}" alt="{{ comment }}" width="800" height="{% widthratio comic_height comic_width 800 %}" title="{{ comment }}" /></div>
+  <div class="pic">
+    <img src="comic/{{ comic_nr }}" alt="{{ comment }}" title="{{ comment }}"
+         width="800" height="{% widthratio comic_height comic_width 800 %}"
+         style="margin-top: {{ comic_title_margin }}px"/>
+  </div>
   <div class="comic_share">
     <a class="twitter" href="http://twitter.com/share?url={{ share_url }}&amp;hashtags=TheLittleMonks,FuckingHilarious" rel="_blank" title="Share on Twitter"></a>
     <a class="facebook" href="http://www.facebook.com/share.php?u={{ share_url }}&amp;title={{ share_title }}" rel="_blank" title="Share on Facebook"></a>

@@ -9,14 +9,21 @@ from common import Comic, render_page, loc
 
 class MainPage(webapp2.RequestHandler):
     def get(self, nr):
+        # Check if there are any comics
         latest_comic = Comic.all().order('-nr').get()
         if not latest_comic:
             return self.response.out.write('Upload first comic plz. kthxbai.')
+
+        # Redirect to the latest comic if the number exceeds the latest one
         latest_nr = latest_comic.nr
         nr = int(nr) if nr else latest_nr
         if nr > latest_nr:
             return self.redirect('/%d' % latest_nr)
+
+        # Get the corresponding comic
         comic = Comic.all().filter('nr =', nr).get()
+
+        # Fill data dict and render
         url = loc + str(nr)
         dic = {'comic_nr': nr,
                'latest': latest_nr,
@@ -25,6 +32,7 @@ class MainPage(webapp2.RequestHandler):
                'url': url,
                'comic_width': comic.width,
                'comic_height': comic.height,
+               'comic_title_margin': comic.title_margin,
                'share_url': urllib.quote(url, ''),
                'share_title': urllib.quote('The Little Monks')}
         render_page(self, 'home.html', dic)
