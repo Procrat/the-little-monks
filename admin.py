@@ -12,7 +12,13 @@ class ManagePage(BlobstoreUploadHandler):
     def get(self):
         if not users.is_current_user_admin():  # Double check
             return self.error(401)
-        self.show_page()
+        comics = [(comic.nr, comic.title, comic.comment)
+                  for comic in Comic.all().order('nr')]
+        logout_url = users.create_logout_url('/')
+        upload_url = blobstore.create_upload_url('/manage')
+        render_page(self, 'manage.html', {'comics': comics,
+                                          'logout_url': logout_url,
+                                          'upload_url': upload_url})
 
     def post(self):
         if not users.is_current_user_admin():  # Double check
@@ -23,19 +29,10 @@ class ManagePage(BlobstoreUploadHandler):
             return self.error(403)
         try:
             getattr(self, action)(self.request.POST)
-            self.show_page()
+            self.redirect('/manage')
         except ValueError:
             self.error(405)
             self.response.out.write('That doesn\'t seem right to me, liefje!')
-
-    def show_page(self):
-        comics = [(comic.nr, comic.title, comic.comment)
-                  for comic in Comic.all().order('nr')]
-        logout_url = users.create_logout_url('/')
-        upload_url = blobstore.create_upload_url('/manage')
-        render_page(self, 'manage.html', {'comics': comics,
-                                          'logout_url': logout_url,
-                                          'upload_url': upload_url})
 
     def add(self, POST):
         title = POST.get('title')
