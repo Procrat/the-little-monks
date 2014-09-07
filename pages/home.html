@@ -4,20 +4,40 @@
 <script type="text/javascript" src="static/jquery.smooth-scroll.min.js"></script>
 <script type="text/javascript" src="static/jquery.cookie.js"></script>
 <script type="text/javascript" charset="utf-8">
-  $(document).ready(function(){
+  $(document).ready(function() {
+    // Scroll to the comic if the cookie is set (navigates with the arrows)
     if ($.cookie('autoscroll') != undefined) {
       $.removeCookie('autoscroll');
       $(window).scrollTop($('.comic').position().top);
     }
-
+    // Set the cookie if the arrows are used
     $('.lower_nav a, .upper_nav a').click(function() {
       $.cookie('autoscroll', 'yep');
     });
+    // Allow navigation with arrow keys
+    $(document).keydown(function(event) {
+      switch (event.which) {
+        case 37:
+          {% if comic.nr > 1 %}
+            $.cookie('autoscroll', 'yep');
+            window.location = '/' + {{ comic.nr - 1 }}
+          {% endif %}
+          break;
+        case 39:
+          {% if comic.nr < latest %}
+            $.cookie('autoscroll', 'yep');
+            window.location = '/' + {{ comic.nr + 1 }}
+          {% endif %}
+          break;
+        default: return;
+      }
+      e.preventDefault();
+    });
 
+    // Toggle comment section on click
     var $title = $('.comments-title');
         $comments = $('#disqus_thread'),
         visible = false;
-
     $title.click(function() {
       if (visible) {
         $comments.slideUp('fast',function() {
