@@ -6,7 +6,7 @@ from google.appengine.ext import db
 from google.appengine.ext.webapp import template
 
 
-loc_ = 'http://thelittlemonks.appspot.com'
+loc_ = 'http://thelittlemonks.com'
 loc = loc_ + '/'
 
 
@@ -16,6 +16,7 @@ class Comic(db.Model):
     image = db.BlobProperty(required=True)
     width = db.IntegerProperty(required=True)
     height = db.IntegerProperty(required=True)
+    title_margin = db.IntegerProperty(required=True, default=0)
     comment = db.TextProperty(required=True)
     pub_date = db.DateTimeProperty(auto_now_add=True)
 
