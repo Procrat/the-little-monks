@@ -4,97 +4,97 @@
 <script type="text/javascript" src="static/jquery.smooth-scroll.min.js"></script>
 <script type="text/javascript" src="static/jquery.cookie.js"></script>
 <script type="text/javascript" charset="utf-8">
-	$(document).ready(function(){
-		if ($.cookie('autoscroll') != undefined) {
-			$.removeCookie('autoscroll');
-			$(window).scrollTop($('.comic').position().top);
-		}
+  $(document).ready(function(){
+    if ($.cookie('autoscroll') != undefined) {
+      $.removeCookie('autoscroll');
+      $(window).scrollTop($('.comic').position().top);
+    }
 
-		$('.lower_nav a, .upper_nav a').click(function() {
-			$.cookie('autoscroll', 'yep');
-		});
+    $('.lower_nav a, .upper_nav a').click(function() {
+      $.cookie('autoscroll', 'yep');
+    });
 
-		var $title = $('.comments-title');
-				$comments = $('#disqus_thread'),
-				visible = false;
+    var $title = $('.comments-title');
+        $comments = $('#disqus_thread'),
+        visible = false;
 
-		$title.click(function() {
-			if (visible) {
-				$comments.slideUp('fast',function() {
-					$comments.addClass('hide')
-									 .slideDown(0)
-									 .css('padding-top', '0px');
-				});
-			} else {
-				$comments.slideUp(0,function() {
-					$comments.removeClass('hide')
-									 .slideDown('fast')
-									 .css('padding-top', '10px');
-					$.smoothScroll({scrollTarget: $title});
-				});
-			}
-			visible = !visible;
-		});
-	});
+    $title.click(function() {
+      if (visible) {
+        $comments.slideUp('fast',function() {
+          $comments.addClass('hide')
+                   .slideDown(0)
+                   .css('padding-top', '0px');
+        });
+      } else {
+        $comments.slideUp(0,function() {
+          $comments.removeClass('hide')
+                   .slideDown('fast')
+                   .css('padding-top', '10px');
+          $.smoothScroll({scrollTarget: $title});
+        });
+      }
+      visible = !visible;
+    });
+  });
 </script>
 {% endblock extra_headers %}
 
 {% block content %}
 <div class="bordered comic">
-	<div class="upper_nav">
-		<div class="first">
-			{% if comic_nr != 1 %}<a href="1"></a>{% else %}<a class="disabled"></a>{% endif %}
-		</div>
-		<div class="prev">
-			{% if comic_nr != 1 %}<a href="{{ comic_nr|add:"-1" }}"></a>{% else %}<a class="disabled"></a>{% endif %}
-		</div>
-		<div class="next">
-			{% if comic_nr != latest %}<a href="{{ comic_nr|add:"1" }}"></a>{% else %}<a class="disabled"></a>{% endif %}
-		</div>
-		<div class="last">
-			{% if comic_nr != latest %}<a href="{{ latest }}"></a>{% else %}<a class="disabled"></a>{% endif %}
-		</div>
-	</div>
-	<h1>{{ title }}</h1>
-	<div class="pic"><img src="comic/{{ comic_nr }}" alt="{{ comment }}" width="800" height="{% widthratio comic_height comic_width 800 %}" title="{{ comment }}" /></div>
-	<div class="comic_share">
-		<a class="twitter" href="http://twitter.com/share?url={{ share_url }}&amp;hashtags=TheLittleMonks,FuckingHilarious" rel="_blank" title="Share on Twitter"></a>
-		<a class="facebook" href="http://www.facebook.com/share.php?u={{ share_url }}&amp;title={{ share_title }}" rel="_blank" title="Share on Facebook"></a>
-		<a class="googleplus" href="https://plus.google.com/share?url={{ share_url }}" rel="_blank" title="Share on Google+"></a>
-		<a class="reddit" href="http://www.reddit.com/submit?url={{ share_url }}&amp;title={{ share_title }}" rel="_blank" title="Share on Reddit"></a>
-		<a class="tumblr" href="http://www.tumblr.com/share/link?url={{ share_url }}&amp;name={{ share_title }}" rel="_blank" title="Share on Tumblr"></a>
-		<a class="digg" href="http://digg.com/submit?&amp;jump=close&amp;url={{ share_url }}&amp;title={{ share_title }}" rel="_blank" title="Share on Digg"></a>
-	</div>
-	<div class="lower_nav">
-		<div class="first">
-			{% if comic_nr != 1 %}<a href="1"></a>{% else %}<a class="disabled"></a>{% endif %}
-		</div>
-		<div class="prev">
-			{% if comic_nr != 1 %}<a href="{{ comic_nr|add:"-1" }}"></a>{% else %}<a class="disabled"></a>{% endif %}
-		</div>
-		<div class="next">
-			{% if comic_nr != latest %}<a href="{{ comic_nr|add:"1" }}"></a>{% else %}<a class="disabled"></a>{% endif %}
-		</div>
-		<div class="last">
-			{% if comic_nr != latest %}<a href="{{ latest }}"></a>{% else %}<a class="disabled"></a>{% endif %}
-		</div>
-	</div>
+  <div class="upper_nav">
+    <div class="first">
+      {% if comic_nr != 1 %}<a href="1"></a>{% else %}<a class="disabled"></a>{% endif %}
+    </div>
+    <div class="prev">
+      {% if comic_nr != 1 %}<a href="{{ comic_nr|add:"-1" }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+    </div>
+    <div class="next">
+      {% if comic_nr != latest %}<a href="{{ comic_nr|add:"1" }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+    </div>
+    <div class="last">
+      {% if comic_nr != latest %}<a href="{{ latest }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+    </div>
+  </div>
+  <h1>{{ title }}</h1>
+  <div class="pic"><img src="comic/{{ comic_nr }}" alt="{{ comment }}" width="800" height="{% widthratio comic_height comic_width 800 %}" title="{{ comment }}" /></div>
+  <div class="comic_share">
+    <a class="twitter" href="http://twitter.com/share?url={{ share_url }}&amp;hashtags=TheLittleMonks,FuckingHilarious" rel="_blank" title="Share on Twitter"></a>
+    <a class="facebook" href="http://www.facebook.com/share.php?u={{ share_url }}&amp;title={{ share_title }}" rel="_blank" title="Share on Facebook"></a>
+    <a class="googleplus" href="https://plus.google.com/share?url={{ share_url }}" rel="_blank" title="Share on Google+"></a>
+    <a class="reddit" href="http://www.reddit.com/submit?url={{ share_url }}&amp;title={{ share_title }}" rel="_blank" title="Share on Reddit"></a>
+    <a class="tumblr" href="http://www.tumblr.com/share/link?url={{ share_url }}&amp;name={{ share_title }}" rel="_blank" title="Share on Tumblr"></a>
+    <a class="digg" href="http://digg.com/submit?&amp;jump=close&amp;url={{ share_url }}&amp;title={{ share_title }}" rel="_blank" title="Share on Digg"></a>
+  </div>
+  <div class="lower_nav">
+    <div class="first">
+      {% if comic_nr != 1 %}<a href="1"></a>{% else %}<a class="disabled"></a>{% endif %}
+    </div>
+    <div class="prev">
+      {% if comic_nr != 1 %}<a href="{{ comic_nr|add:"-1" }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+    </div>
+    <div class="next">
+      {% if comic_nr != latest %}<a href="{{ comic_nr|add:"1" }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+    </div>
+    <div class="last">
+      {% if comic_nr != latest %}<a href="{{ latest }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+    </div>
+  </div>
 </div>
 <div class="bordered comments">
-	<div class="comments-title">
-		<img src="static/down.png" alt="Down" style="float:left" />
-		<img src="static/down.png" alt="Down" style="float:right" />
-		<h1>Comments</h1>
-	</div>
-	<div id="disqus_thread" class="hide"></div>
-	<script type="text/javascript">
-		var disqus_shortname = 'thelittlemonks';
-		(function() {
-			var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-			dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
-			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-		})();
-	</script>
-	<noscript>Please enable JavaScript to view the comments.</noscript>
+  <div class="comments-title">
+    <img src="static/down.png" alt="Down" style="float:left" />
+    <img src="static/down.png" alt="Down" style="float:right" />
+    <h1>Comments</h1>
+  </div>
+  <div id="disqus_thread" class="hide"></div>
+  <script type="text/javascript">
+    var disqus_shortname = 'thelittlemonks';
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the comments.</noscript>
 </div>
 {% endblock content %}
