@@ -2,12 +2,17 @@
 # -*- coding: utf-8 -*-
 import os
 
+import jinja2
 from google.appengine.ext import db
-from google.appengine.ext.webapp import template
 
 
-loc_ = 'http://thelittlemonks.com'
-loc = loc_ + '/'
+LOC_ = 'http://thelittlemonks.com'
+LOC = LOC_ + '/'
+
+JINJA_ENVIRONMENT = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True)
 
 
 class Comic(db.Model):
@@ -21,10 +26,12 @@ class Comic(db.Model):
     pub_date = db.DateTimeProperty(auto_now_add=True)
 
 
-def render_page(req_handler, filename, template_dict={}):
-    path = os.path.join(os.path.dirname(__file__), 'pages', filename)
-    template_dict['base'] = loc
-    req_handler.response.out.write(template.render(path, template_dict))
+def render_page(req_handler, filename, template_dict=None):
+    if template_dict is None:
+        template_dict = {}
+    template = JINJA_ENVIRONMENT.get_template(os.path.join('pages', filename))
+    template_dict['base'] = LOC
+    req_handler.response.write(template.render(template_dict))
 
 
 def not_found(req_handler):

@@ -2,10 +2,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>The Little Monks</title>
-    <link>https://thelittlemonks.appspot.com</link>
+    <link>{{ base }}</link>
     <description>A little web comic</description>
     <category>Web Comic</category>
-    <copyright>Copyright {% now "Y" %}, Myrjam Van de Vijver</copyright>
+    <copyright>Copyright 2013-{{ year }}, Myrjam Van de Vijver</copyright>
     <language>en</language>
     <atom:link href="{{ base }}rss" rel="self" type="application/rss+xml" />
     {% for comic in comics %}
@@ -13,7 +13,7 @@
       <title>Comic {{ comic.nr }}: {{ comic.title }}</title>
       <link>{{ base }}{{ comic.nr }}</link>
       <guid>{{ base }}{{ comic.nr }}</guid>
-      <pubDate>{{ comic.pub_date|date:"r" }}</pubDate>
+      <pubDate>{{ comic.pub_date.strftime('%a, %d %b %y %H:%M:%S UT') }}</pubDate>
       <description>New little comic update! Hooray!</description>
     </item>
     {% endfor %}

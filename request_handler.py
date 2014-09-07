@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 import webapp2
 
-import home, admin, other, monks, contact
+import home, admin, other, contact
 
 
 pages = [('0', other.ZeroEasterPage),
          ('([0-9]*)', home.MainPage),
          ('comic/(.*)', other.ImageHandler),
          ('about', other.AboutPage),
-         ('about_monks', monks.AboutMonksPage),
+         ('about_monks', other.AboutMonksPage),
          ('manage', admin.ManagePage),
          ('rss', other.RSSPage),
          ('contact', contact.ContactPage),

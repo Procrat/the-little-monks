@@ -12,8 +12,7 @@ class ManagePage(BlobstoreUploadHandler):
     def get(self):
         if not users.is_current_user_admin():  # Double check
             return self.error(401)
-        comics = [(comic.nr, comic.title, comic.comment)
-                  for comic in Comic.all().order('nr')]
+        comics = Comic.all().order('nr')
         logout_url = users.create_logout_url('/')
         upload_url = blobstore.create_upload_url('/manage')
         render_page(self, 'manage.html', {'comics': comics,

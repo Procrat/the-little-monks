@@ -44,33 +44,33 @@
     <hr />
     <h2>Change comics</h2>
     <table>
-      {% for i, title in comics %}
+      {% for comic in comics %}
         <tr>
-          <td>{{ i }}.</td>
-          <td>{{ title }}</td>
+          <td>{{ loop.index }}.</td>
+          <td>{{ comic.title }}</td>
           <td class="veld">
             <form enctype="multipart/form-data" method="post" action="manage">
               <input type="hidden" name="action" value="rename" />
-              <input type="hidden" name="nr" value="{{ i }}" />
-              <input type="text" name="name" />
+              <input type="hidden" name="nr" value="{{ loop.index }}" />
+              <input type="text" name="name" value="{{ comic.title }}" />
               <input type="submit" value="Rename" />
             </form>
             <form enctype="multipart/form-data" method="post" action="{{ upload_url }}">
               <input type="hidden" name="action" value="change_image" />
-              <input type="hidden" name="nr" value="{{ i }}" />
+              <input type="hidden" name="nr" value="{{ loop.index }}" />
               <input type="file" name="image" />
               <input type="submit" value="Change image" />
             </form>
             <form enctype="multipart/form-data" method="post" action="manage">
               <input type="hidden" name="action" value="change_comment" />
-              <input type="hidden" name="nr" value="{{ i }}" />
-              <input type="text" name="comment" />
+              <input type="hidden" name="nr" value="{{ loop.index }}" />
+              <input type="text" name="comment" value="{{ comic.comment }}"/>
               <input type="submit" value="Change comment" />
             </form>
             <form enctype="multipart/form-data" method="post" action="manage">
               <input type="hidden" name="action" value="change_title_margin" />
-              <input type="hidden" name="nr" value="{{ i }}" />
-              <input type="text" name="title_margin" />
+              <input type="hidden" name="nr" value="{{ loop.index }}" />
+              <input type="text" name="title_margin" value="{{ comic.title_margin }}" />
               <input type="submit" value="Change title margin" />
             </form>
           </td>

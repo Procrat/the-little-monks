@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "pages/base.html" %}
 
 {% block extra_headers %}
 <script type="text/javascript" src="static/jquery.smooth-scroll.min.js"></script>
@@ -43,23 +43,23 @@
 <div class="bordered comic">
   <div class="upper_nav">
     <div class="first">
-      {% if comic_nr != 1 %}<a href="1"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != 1 %}<a href="1"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
     <div class="prev">
-      {% if comic_nr != 1 %}<a href="{{ comic_nr|add:"-1" }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != 1 %}<a href="{{ comic.nr - 1 }}"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
     <div class="next">
-      {% if comic_nr != latest %}<a href="{{ comic_nr|add:"1" }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != latest %}<a href="{{ comic.nr + 1 }}"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
     <div class="last">
-      {% if comic_nr != latest %}<a href="{{ latest }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != latest %}<a href="{{ latest }}"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
   </div>
-  <h1>{{ title }}</h1>
+  <h1>{{ comic.title }}</h1>
   <div class="pic">
-    <img src="comic/{{ comic_nr }}" alt="{{ comment }}" title="{{ comment }}"
-         width="800" height="{% widthratio comic_height comic_width 800 %}"
-         style="margin-top: {{ comic_title_margin }}px"/>
+    <img src="comic/{{ comic.nr }}" alt="{{ comic.comment }}" title="{{ comic.comment }}"
+         width="800" height="{{ comic.height * 800 // comic.width }}"
+         style="margin-top: {{ comic.title_margin }}px"/>
   </div>
   <div class="comic_share">
     <a class="twitter" href="http://twitter.com/share?url={{ share_url }}&amp;hashtags=TheLittleMonks,FuckingHilarious" rel="_blank" title="Share on Twitter"></a>
@@ -71,16 +71,16 @@
   </div>
   <div class="lower_nav">
     <div class="first">
-      {% if comic_nr != 1 %}<a href="1"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != 1 %}<a href="1"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
     <div class="prev">
-      {% if comic_nr != 1 %}<a href="{{ comic_nr|add:"-1" }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != 1 %}<a href="{{ comic.nr - 1 }}"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
     <div class="next">
-      {% if comic_nr != latest %}<a href="{{ comic_nr|add:"1" }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != latest %}<a href="{{ comic.nr + 1 }}"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
     <div class="last">
-      {% if comic_nr != latest %}<a href="{{ latest }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != latest %}<a href="{{ latest }}"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
   </div>
 </div>

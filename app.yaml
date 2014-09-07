@@ -21,5 +21,5 @@ handlers:
   script: request_handler.app
 
 libraries:
-- name: django
-  version: "1.4"
+- name: jinja2
+  version: latest

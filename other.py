@@ -10,10 +10,19 @@ class AboutPage(RequestHandler):
         render_page(self, 'about.html')
 
 
+class AboutMonksPage(RequestHandler):
+    def get(self):
+        render_page(self, 'about_monks.html')
+
+
 class RSSPage(RequestHandler):
     def get(self):
+        from datetime import datetime
         self.response.content_type = 'application/rss+xml'
-        render_page(self, 'rss.xml', {'comics': list(Comic.all())})
+        render_page(self, 'rss.xml', {
+            'comics': list(Comic.all()),
+            'year': datetime.now().year,
+        })
 
 
 class ContactPage(RequestHandler):

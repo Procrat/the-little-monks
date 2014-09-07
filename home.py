@@ -4,7 +4,7 @@ import urllib
 
 import webapp2
 
-from common import Comic, render_page, loc
+from common import Comic, render_page, LOC
 
 
 class MainPage(webapp2.RequestHandler):
@@ -24,15 +24,8 @@ class MainPage(webapp2.RequestHandler):
         comic = Comic.all().filter('nr =', nr).get()
 
         # Fill data dict and render
-        url = loc + str(nr)
-        dic = {'comic_nr': nr,
-               'latest': latest_nr,
-               'title': comic.title,
-               'comment': comic.comment,
-               'url': url,
-               'comic_width': comic.width,
-               'comic_height': comic.height,
-               'comic_title_margin': comic.title_margin,
-               'share_url': urllib.quote(url, ''),
+        dic = {'latest': latest_nr,
+               'comic': comic,
+               'share_url': urllib.quote(LOC + str(nr), ''),
                'share_title': urllib.quote('The Little Monks')}
         render_page(self, 'home.html', dic)
