@@ -339,7 +339,7 @@ form.contact td {
 form.contact th {
 	font-weight: bold;
 }
-form.contact td * {
+form.contact td input, fieldset, textarea {
 	width: 100%;
 }
 form.contact td input[type=submit] {

@@ -2,12 +2,13 @@
 
 {% block extra_headers %}
 <script src="static/jquery.validate.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="static/bday-picker.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function(){
-    $('form.contact').validate({
-      rules: {
-        email: { email: true }
-      }
+    $('form.contact').validate();
+    $('.birthday-picker').birthdaypicker({
+      dateFormat: 'littleEndian',
+      monthFormat: 'long'
     });
   });
 </script>
@@ -20,20 +21,24 @@
   <form class="contact" action="contact" method="post">
     <table>
       <tr>
-        <th>Name</th>
-        <td><input type="text" name="name" required="required" /></td>
+        <th><label for="name">Name</label></th>
+        <td><input type="text" id="name" name="name" required="required" /></td>
       </tr>
       <tr>
-        <th>Email address</th>
-        <td><input type="text" name="email" required="required" /></td>
+        <th><label for="email">Email address</label></th>
+        <td><input type="text" id="email" name="email" required="required" email="email" /></td>
       </tr>
       <tr>
-        <th>Subject</th>
-        <td><input type="text" name="subject" required="required" /></td>
+        <th><label>Birth date</label></th>
+        <td class='birthday-picker'></td>
       </tr>
       <tr>
-        <th>Comment</th>
-        <td><textarea name="comment" rows="4" cols="*" required="required"></textarea></td>
+        <th><label for="subject">Subject</label></th>
+        <td><input type="text" id="subject" name="subject" required="required" /></td>
+      </tr>
+      <tr>
+        <th><label for="comment">Comment</label></th>
+        <td><textarea id="comment" name="comment" rows="4" cols="*" required="required"></textarea></td>
       </tr>
       <tr>
         <th></th>
