@@ -1,21 +1,21 @@
 @font-face {
-	font-family: Amatic;
-	src: url('../static/Amatic.ttf');
+    font-family: Amatic;
+    src: url('../static/Amatic.ttf');
 }
 
 @font-face {
-	font-family: ie-Amatic;
-	src: url('../static/Amatic.eot');
+    font-family: ie-Amatic;
+    src: url('../static/Amatic.eot');
 }
 
 @font-face {
-	font-family: MyriadProLight;
-	src: url('../static/MyriadProLight.ttf')
+    font-family: MyriadProLight;
+    src: url('../static/MyriadProLight.ttf')
 }
 
 @font-face {
-	font-family: ie-MyriadProLight;
-	src: url('../static/MyriadProLight.eot')
+    font-family: ie-MyriadProLight;
+    src: url('../static/MyriadProLight.eot')
 }
 
 html, body, div, span, applet, object, iframe,
@@ -26,73 +26,73 @@ small, strike, strong, sub, sup, tt, var,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	outline: 0;
-	font-weight: inherit;
-	font-style: inherit;
-	font-size: 100%;
-	font-family: inherit;
-	vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
 }
 
 /* TAG STYLES */
 
 body {
-	margin: 0px auto;
-	max-width: 800px;
-	background-color: gray;
-	font-family: ie-MyriadProLight, MyriadProLight, sans-serif;
+    margin: 0px auto;
+    max-width: 800px;
+    background-color: gray;
+    font-family: ie-MyriadProLight, MyriadProLight, sans-serif;
 }
 
 a img {
-	border: none;
+    border: none;
 }
 
 h1, h2, h3 {
-	clear: both;
-	position: relative;
-	z-index: 5;
-	font-family: ie-Amatic, Amatic, sans-serif;
-	text-align: center;
+    clear: both;
+    position: relative;
+    z-index: 5;
+    font-family: ie-Amatic, Amatic, sans-serif;
+    text-align: center;
 }
 
 h1 {
-	font-size: 2.6em;
-	padding-bottom: 20px;
+    font-size: 2.6em;
+    padding-bottom: 20px;
 }
 h2 {
-	font-size: 1.8em;
+    font-size: 1.8em;
 }
 
 p {
-	margin: 5px;
+    margin: 5px;
 }
 
 /* COMMON STYLES */
 
 .disabled {
-	/* IE 8 */
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
-	/* IE 5-7 */
-	filter: alpha(opacity=40);
-	/* Netscape */
-	-moz-opacity: 0.4;
-	/* Safari 1.x */
-	-khtml-opacity: 0.4;
-	/* Good browsers */
-	opacity: 0.4;
+    /* IE 8 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=40)";
+    /* IE 5-7 */
+    filter: alpha(opacity=40);
+    /* Netscape */
+    -moz-opacity: 0.4;
+    /* Safari 1.x */
+    -khtml-opacity: 0.4;
+    /* Good browsers */
+    opacity: 0.4;
 }
 
 .center {
-	text-align: center;
+    text-align: center;
 }
 
 .hide {
-	position: absolute !important;
-	top: -9999px !important;
-	left: -9999px !important;
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
 }
 
 .small {
@@ -102,50 +102,50 @@ p {
 /* SPECIFIC STYLES */
 
 #header {
-	height: 150px;
-	background-color: gray;
+    height: 150px;
+    background-color: gray;
 }
 
 #links {
-	height: 50px;
-	background-color: white;
-	padding: 5px 0px;
-	margin-bottom: 10px;
-	-webkit-border-bottom-right-radius: 20px;
-	-webkit-border-bottom-left-radius: 20px;
-	-moz-border-radius-bottomright: 20px;
-	-moz-border-radius-bottomleft: 20px;
-	border-bottom-right-radius: 20px;
-	border-bottom-left-radius: 20px;
+    height: 50px;
+    background-color: white;
+    padding: 5px 0px;
+    margin-bottom: 10px;
+    -webkit-border-bottom-right-radius: 20px;
+    -webkit-border-bottom-left-radius: 20px;
+    -moz-border-radius-bottomright: 20px;
+    -moz-border-radius-bottomleft: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 #internal {
-	float: left;
-	padding: 5px;
-	padding-left: 20px;
+    float: left;
+    padding: 5px;
+    padding-left: 20px;
 }
 
 #external {
-	float: right;
-	padding: 5px;
-	padding-right: 20px;
+    float: right;
+    padding: 5px;
+    padding-right: 20px;
 }
 
 #links a {
-	display: inline-block;
-	background-position: 0 -100%;
+    display: inline-block;
+    background-position: 0 -100%;
 }
 #links a:hover {
-	background-position: 0 0;
+    background-position: 0 0;
 }
 #internal a {
-	width: 60px;
-	height: 40px;
+    width: 60px;
+    height: 40px;
 }
 #external a {
-	width: 20px;
-	height: 20px;
-	background-size: 100%;
+    width: 20px;
+    height: 20px;
+    background-size: 100%;
 }
 
 a#home {background-image: url('../static/home.png')}
@@ -162,58 +162,58 @@ a.googleplus{background-image: url('../static/googleplus.png')}
 .bordered,
 .monk,
 #monk-selection {
-	clear: both;
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	border-radius: 20px;
-	background-color: white;
-	padding: 15px;
-	margin: 10px 0px;
-	overflow: hidden;
+    clear: both;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    background-color: white;
+    padding: 15px;
+    margin: 10px 0px;
+    overflow: hidden;
 }
 
 /* Main (comic) page */
 
 .comic {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .upper_nav {
-	clear: both;
-	float: left;
+    clear: both;
+    float: left;
 }
 
 .lower_nav {
-	float: right;
-	position: relative;
-	z-index: 5;
+    float: right;
+    position: relative;
+    z-index: 5;
 }
 
 .upper_nav,
 .lower_nav {
-	max-width: 200px;
-	height: 50px;
+    max-width: 200px;
+    height: 50px;
 }
 
 .first, .prev, .next, .last {
-	float: left;
-	padding: 4px;
+    float: left;
+    padding: 4px;
 }
 
 .upper_nav a,
 .lower_nav a {
-	width: 40px;
-	height: 40px;
-	display: block;
-	background-position: 0 -40px;
+    width: 40px;
+    height: 40px;
+    display: block;
+    background-position: 0 -40px;
 }
 .upper_nav a:hover,
 .lower_nav a:hover {
-	background-position: 0 0px;
+    background-position: 0 0px;
 }
 .upper_nav a.disabled,
 .lower_nav a.disabled {
-	background-position: 0 -40px;
+    background-position: 0 -40px;
 }
 
 .first a {background-image: url('../static/first.png')}
@@ -222,26 +222,26 @@ a.googleplus{background-image: url('../static/googleplus.png')}
 .last a {background-image: url('../static/last.png')}
 
 .pic {
-	margin-top: -50px;
-	margin-left: -15px;
-	margin-bottom: -30px;
+    margin-top: -50px;
+    margin-left: -15px;
+    margin-bottom: -30px;
 }
 
 .comic_share {
-	float: left;
-	position: relative;
-	z-index: 5;
+    float: left;
+    position: relative;
+    z-index: 5;
 }
 
 .comic_share a {
-	display: inline-block;
-	width: 40px;
-	height: 40px;
-	margin: 4px;
-	background-position: 0 40px;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 4px;
+    background-position: 0 40px;
 }
 .comic_share a:hover {
-	background-position: 0 0;
+    background-position: 0 0;
 }
 
 a.reddit {background-image: url('../static/reddit.png')}
@@ -249,49 +249,49 @@ a.tumblr {background-image: url('../static/tumblr.png')}
 a.digg {background-image: url('../static/digg.png')}
 
 .comments {
-	clear: both;
+    clear: both;
 }
 
 .comments-title {
-	cursor: pointer;
-	cursor: hand;
+    cursor: pointer;
+    cursor: hand;
 }
 .comments-title img {
-	margin-top: 7px;
+    margin-top: 7px;
 }
 .comments-title h1 {
-	clear: none;
-	padding-bottom: 10px;
+    clear: none;
+    padding-bottom: 10px;
 }
 
 
 /* About monks page */
 
 #monk-selection {
-	padding: 5px;
+    padding: 5px;
 }
 #monk-selection table {
-	width: 100%;
-	text-align: center;
-	font-family: ie-Amatic, Amatic, sans-serif;
-	margin-top: -5px;
-	font-size: 1.8em;
+    width: 100%;
+    text-align: center;
+    font-family: ie-Amatic, Amatic, sans-serif;
+    margin-top: -5px;
+    font-size: 1.8em;
 }
 #monk-selection td {
-	cursor: pointer;
-	cursor: hand;
+    cursor: pointer;
+    cursor: hand;
 }
 
 .monk {
-	position: relative;
-	min-height: 208px;
+    position: relative;
+    min-height: 208px;
 }
 
 .monk-right {
-	float: left;
-	position: relative;
-	left: 190px;
-	width: 550px;
+    float: left;
+    position: relative;
+    left: 190px;
+    width: 550px;
 }
 
 h2,
@@ -299,54 +299,54 @@ h2,
 .monk-age,
 .monk-quote,
 .monk-ref {
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	background-color: lightgray;
-	padding: 5px;
-	margin: 5px;
-	display: inline-block;
-	max-width: 550px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-color: lightgray;
+    padding: 5px;
+    margin: 5px;
+    display: inline-block;
+    max-width: 550px;
 }
 
 .monk-pic {
-	float: left;
-	position: absolute;
-	margin: -94px 20px 10px 20px;
-	top: 50%;
+    float: left;
+    position: absolute;
+    margin: -94px 20px 10px 20px;
+    top: 50%;
 }
 .monk-pic img {
-	width: 150px;
-	height: 188px;
+    width: 150px;
+    height: 188px;
 }
 
 .monk h2 {
-	padding-top: 0px;
+    padding-top: 0px;
 }
 
 
 /* Contact page */
 
 form.contact {
-	margin: 10px auto;
-	padding: 0 auto;
-	width: 450px;
+    margin: 10px auto;
+    padding: 0 auto;
+    width: 450px;
 }
 form.contact table {
-	width: 100%;
+    width: 100%;
 }
 form.contact th,
 form.contact td {
-	padding: 5px;
-	vertical-align: middle;
+    padding: 5px;
+    vertical-align: middle;
 }
 form.contact th {
-	font-weight: bold;
+    font-weight: bold;
 }
 form.contact td input, fieldset, textarea {
-	width: 100%;
+    width: 100%;
 }
 form.contact td input[type=submit] {
-	width: auto;
-	float: right;
+    width: auto;
+    float: right;
 }
