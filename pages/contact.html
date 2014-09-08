@@ -22,22 +22,26 @@
     <table>
       <tr>
         <th><label for="name">Name</label></th>
-        <td><input type="text" id="name" name="name" required="required" /></td>
+        <td><input type="text" id="name" name="name" /></td>
       </tr>
       <tr>
-        <th><label for="email">Email address</label></th>
+        <th><label for="email">Email address*</label></th>
         <td><input type="text" id="email" name="email" required="required" email="email" /></td>
       </tr>
       <tr>
-        <th><label>Birth date (*)</label></th>
-        <td class='birthday-picker'></td>
+        <th><label>Birth date</label></th>
+        <td>
+          <div class='birthday-picker'></div>
+          <p class="small">Fill out your birth date and you may or may not
+            receive a little surprise on your birthday.</p>
+        </td>
       </tr>
       <tr>
-        <th><label for="subject">Subject</label></th>
+        <th><label for="subject">Subject*</label></th>
         <td><input type="text" id="subject" name="subject" required="required" /></td>
       </tr>
       <tr>
-        <th><label for="comment">Comment</label></th>
+        <th><label for="comment">Comment*</label></th>
         <td><textarea id="comment" name="comment" rows="4" cols="*" required="required"></textarea></td>
       </tr>
       <tr>
@@ -46,7 +50,5 @@
       </tr>
     </table>
   </form>
-  <p class="small">(*) Fill out your birth date and you may or may not receive a little
-  surprise on your birthday.</p>
 </div>
 {% endblock content %}
