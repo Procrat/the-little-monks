@@ -95,6 +95,10 @@ p {
 	left: -9999px !important;
 }
 
+.small {
+    font-size: 80%;
+}
+
 /* SPECIFIC STYLES */
 
 #header {
