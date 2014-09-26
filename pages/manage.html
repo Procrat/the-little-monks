@@ -37,7 +37,7 @@
     </p></form>
     <hr />
     <h2>Remove comic</h2>
-    <form enctype="multipart/form-data" method="post" action="manage"><p>
+    <form enctype="multipart/form-data" method="post" action="/manage"><p>
       <input type="hidden" name="action" value="remove" />
       <input type="submit" value="Remove last comic" />
     </p></form>
@@ -49,7 +49,7 @@
           <td>{{ loop.index }}.</td>
           <td>{{ comic.title }}</td>
           <td class="veld">
-            <form enctype="multipart/form-data" method="post" action="manage">
+            <form enctype="multipart/form-data" method="post" action="/manage">
               <input type="hidden" name="action" value="rename" />
               <input type="hidden" name="nr" value="{{ loop.index }}" />
               <input type="text" name="name" value="{{ comic.title }}" />
@@ -61,13 +61,13 @@
               <input type="file" name="image" />
               <input type="submit" value="Change image" />
             </form>
-            <form enctype="multipart/form-data" method="post" action="manage">
+            <form enctype="multipart/form-data" method="post" action="/manage">
               <input type="hidden" name="action" value="change_comment" />
               <input type="hidden" name="nr" value="{{ loop.index }}" />
               <input type="text" name="comment" value="{{ comic.comment }}"/>
               <input type="submit" value="Change comment" />
             </form>
-            <form enctype="multipart/form-data" method="post" action="manage">
+            <form enctype="multipart/form-data" method="post" action="/manage">
               <input type="hidden" name="action" value="change_title_margin" />
               <input type="hidden" name="nr" value="{{ loop.index }}" />
               <input type="text" name="title_margin" value="{{ comic.title_margin }}" />

@@ -1,8 +1,8 @@
 {% extends "pages/base.html" %}
 
 {% block extra_headers %}
-<script src="static/jquery.validate.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="static/bday-picker.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/jquery.validate.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/bday-picker.min.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function(){
     $('form.contact').validate();
@@ -18,7 +18,7 @@
 <div class="bordered">
   <h1>Contact</h1>
   <p>You can contact me using the form bellow. I'll try to get back as you as soon as possible. You can also follow The Little Monks on <a href="https://www.facebook.com/pages/The-Little-Monks/466458066741969" rel="_blank">Facebook</a>, <a href="https://twitter.com/TheLittleMonks" rel="_blank">Twitter</a> or <a href="https://plus.google.com/communities/117381000910337897773" rel="_blank">Google+</a>.</p>
-  <form class="contact" action="contact" method="post">
+  <form class="contact" action="/contact" method="post">
     <table>
       <tr>
         <th><label for="name">Name</label></th>

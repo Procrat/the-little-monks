@@ -1,8 +1,8 @@
 {% extends "pages/base.html" %}
 
 {% block extra_headers %}
-<script type="text/javascript" src="static/jquery.smooth-scroll.min.js"></script>
-<script type="text/javascript" src="static/jquery.cookie.js"></script>
+<script type="text/javascript" src="/static/jquery.smooth-scroll.min.js"></script>
+<script type="text/javascript" src="/static/jquery.cookie.js"></script>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() {
     // Scroll to the comic if the cookie is set (navigates with the arrows)
@@ -63,21 +63,21 @@
 <div class="bordered comic">
   <div class="upper_nav">
     <div class="first">
-      {% if comic.nr != 1 %}<a href="1"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != 1 %}<a href="/1"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
     <div class="prev">
-      {% if comic.nr != 1 %}<a href="{{ comic.nr - 1 }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != 1 %}<a href="/{{ comic.nr - 1 }}"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
     <div class="next">
-      {% if comic.nr != latest %}<a href="{{ comic.nr + 1 }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != latest %}<a href="/{{ comic.nr + 1 }}"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
     <div class="last">
-      {% if comic.nr != latest %}<a href="{{ latest }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != latest %}<a href="/{{ latest }}"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
   </div>
   <h1>{{ comic.title }}</h1>
   <div class="pic">
-    <img src="comic/{{ comic.nr }}" alt="{{ comic.comment }}" title="{{ comic.comment }}"
+    <img src="/comic/{{ comic.nr }}" alt="{{ comic.comment }}" title="{{ comic.comment }}"
          width="800" height="{{ comic.height * 800 // comic.width }}"
          style="margin-top: {{ comic.title_margin }}px"/>
   </div>
@@ -91,23 +91,23 @@
   </div>
   <div class="lower_nav">
     <div class="first">
-      {% if comic.nr != 1 %}<a href="1"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != 1 %}<a href="/1"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
     <div class="prev">
-      {% if comic.nr != 1 %}<a href="{{ comic.nr - 1 }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != 1 %}<a href="/{{ comic.nr - 1 }}"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
     <div class="next">
-      {% if comic.nr != latest %}<a href="{{ comic.nr + 1 }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != latest %}<a href="/{{ comic.nr + 1 }}"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
     <div class="last">
-      {% if comic.nr != latest %}<a href="{{ latest }}"></a>{% else %}<a class="disabled"></a>{% endif %}
+      {% if comic.nr != latest %}<a href="/{{ latest }}"></a>{% else %}<a class="disabled"></a>{% endif %}
     </div>
   </div>
 </div>
 <div class="bordered comments">
   <div class="comments-title">
-    <img src="static/down.png" alt="Down" style="float:left" />
-    <img src="static/down.png" alt="Down" style="float:right" />
+    <img src="/static/down.png" alt="Down" style="float:left" />
+    <img src="/static/down.png" alt="Down" style="float:right" />
     <h1>Comments</h1>
   </div>
   <div id="disqus_thread" class="hide"></div>
