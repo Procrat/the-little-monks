@@ -6,7 +6,7 @@ import home, admin, other, contact
 
 
 pages = [('0', other.ZeroEasterPage),
-         ('([0-9]*)', home.MainPage),
+         ('([0-9]*)', home.TemporaryPage),
          ('comic/(.*)', other.ImageHandler),
          ('about', other.AboutPage),
          ('about_monks', other.AboutMonksPage),

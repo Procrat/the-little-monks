@@ -350,3 +350,31 @@ form.contact td input[type=submit] {
     width: auto;
     float: right;
 }
+
+
+/* TEMPORARY */
+
+div.pic {
+    margin-top: -20px;
+}
+div.comic p {
+    text-align: center;
+    font-size: 2.2em;
+    margin-bottom: 30px;
+    font-family: ie-Amatic, Amatic, sans-serif;
+}
+div.comic p a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 0 4px;
+    background-position: 0 -100%;
+    background-size: 100%;
+}
+div.comic p a:hover {
+    background-position: 0 0;
+}
+div.comic p a.facebook{background-image: url('../static/facebook.png')}
+div.comic p a.facebook{margin: 0 -6px 0 0}
+div.comic p a.twitter{background-image: url('../static/twitter.png')}
+div.comic p a.googleplus{background-image: url('../static/googleplus.png')}
