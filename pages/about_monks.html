@@ -1,15 +1,41 @@
 {% extends "pages/base.html" %}
 
+{% block extra_headers %}
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Animation speed
+    var speed = 300;
+
+    $('#monk-selection td#all').click(function() {
+      setTimeout(function(){$('.part').fadeIn(speed)}, speed);
+    });
+
+    $('#monk-selection td').not('#all').each(function() {
+      var part= $(this).data('part');
+      if ($(part).children().size() == 0) {
+        $(this).addClass('disabled');
+        $(this).css('cursor', 'default');
+      } else {
+        $(this).click(function() {
+          setTimeout(function(){$(part).fadeIn(speed)}, speed);
+          $('.part').not(part).fadeOut(speed);
+        });
+      }
+    });
+  });
+</script>
+{% endblock extra_headers %}
+
 {% block content %}
 <div id="monk-selection">
   <table>
     <tr>
-      <td onclick="setTimeout(function(){$('#atoe').fadeIn(300);},300);$('.part').not('#atoe').fadeOut(300);">A-E</td>
-      <td onclick="setTimeout(function(){$('#ftoj').fadeIn(300);},300);$('.part').not('#ftoj').fadeOut(300);">F-J</td>
-      <td onclick="setTimeout(function(){$('#ktoo').fadeIn(300);},300);$('.part').not('#ktoo').fadeOut(300);">K-O</td>
-      <td onclick="setTimeout(function(){$('#ptot').fadeIn(300);},300);$('.part').not('#ptot').fadeOut(300);">P-T</td>
-      <td onclick="setTimeout(function(){$('#utoz').fadeIn(300);},300);$('.part').not('#utoz').fadeOut(300);">U-Z</td>
-      <td onclick="setTimeout(function(){$('.part').fadeIn(300);},300);">All</td>
+      <td id="all">All</td>
+      <td data-part="#atoe">A-E</td>
+      <td data-part="#ftoj">F-J</td>
+      <td data-part="#ktoo">K-O</td>
+      <td data-part="#ptot">P-T</td>
+      <td data-part="#utoz">U-Z</td>
     </tr>
   </table>
 </div>
