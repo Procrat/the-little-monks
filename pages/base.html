@@ -30,19 +30,20 @@
     </script>
     <script type="text/javascript">
       $(document).ready(function(){
-        $('a[rel="_blank"]').each(function(){
-          $(this).click(function(e){
-            window.open($(this).attr('href'));
-            return false;
-          });
+        $('a[rel="_blank"]').click(function(){
+          var url = $(this).get(0).href;
+          ga('send', 'event', 'outbound', 'click', url);
+          window.open($(this).attr('href'));
+          return false;
         });
-        $('a[rel="_blank"], a[rel="_nontrackable"]').each(function(){
+        $('a[rel="_nontrackable"]').click(function(){
           var url = $(this).get(0).href;
           ga('send', 'event', 'outbound', 'click', url, {'hitCallback':
             function () {
               document.location = url;
             }
           });
+          return false;
         });
       });
     </script>
