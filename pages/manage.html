@@ -33,6 +33,7 @@
       Title: <input type="text" name="title" /><br />
       Comment: <input type="text" name="comment" /><br />
       Margin with title: <input type="text" name="title_margin" value="0" /><br />
+      RSS comment: <input type="text" name="rss_comment" /><br />
       <input type="submit" value="Add comic" />
     </p></form>
     <hr />
@@ -72,6 +73,12 @@
               <input type="hidden" name="nr" value="{{ loop.index }}" />
               <input type="text" name="title_margin" value="{{ comic.title_margin }}" />
               <input type="submit" value="Change title margin" />
+            </form>
+            <form enctype="multipart/form-data" method="post" action="/manage">
+              <input type="hidden" name="action" value="change_rss_comment" />
+              <input type="hidden" name="nr" value="{{ loop.index }}" />
+              <input type="text" name="rss_comment" value="{{ comic.rss_comment }}" />
+              <input type="submit" value="Change RSS comment" />
             </form>
           </td>
         </tr>

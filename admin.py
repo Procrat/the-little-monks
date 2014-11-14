@@ -24,7 +24,8 @@ class ManagePage(BlobstoreUploadHandler):
             return self.error(401)
         action = self.request.POST.get('action')
         if action not in ('add', 'remove', 'rename', 'change_image',
-                          'change_comment', 'change_title_margin'):
+                          'change_comment', 'change_title_margin',
+                          'change_rss_comment'):
             return self.error(403)
         try:
             getattr(self, action)(self.request.POST)
@@ -38,13 +39,16 @@ class ManagePage(BlobstoreUploadHandler):
         uploads = self.get_uploads('image')
         comment = POST.get('comment')
         title_margin = int(POST.get('title_margin'))
-        if title is None or not uploads or comment is None or title_margin < 0:
+        rss_comment = POST.get('rss_comment')
+        if (title is None or not uploads or comment is None
+                or title_margin < 0 or rss_comment is None):
             raise ValueError
         latest = Comic.all().order('-nr').get()
         nr = latest.nr + 1 if latest else 1
         (width, height, blob) = handle_image(uploads[0])
         Comic(nr=nr, title=title, image=blob, width=width, height=height,
-              comment=comment, title_margin=title_margin).put()
+              comment=comment, title_margin=title_margin,
+              rss_comment=rss_comment).put()
 
     def remove(self, POST):
         to_del = Comic.all().order('-nr').get()
@@ -89,6 +93,15 @@ class ManagePage(BlobstoreUploadHandler):
         if comic is None or title_margin < 0:
             raise ValueError
         comic.title_margin = title_margin
+        comic.put()
+
+    def change_rss_comment(self, POST):
+        nr = int(POST.get('nr'))
+        rss_comment = POST.get('rss_comment')
+        comic = Comic.all().filter('nr =', nr).get()
+        if comic is None or rss_comment is None or len(rss_comment) == 0:
+            raise ValueError
+        comic.rss_comment = rss_comment
         comic.put()
 
 

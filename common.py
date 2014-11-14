@@ -23,6 +23,8 @@ class Comic(db.Model):
     height = db.IntegerProperty(required=True)
     title_margin = db.IntegerProperty(required=True, default=0)
     comment = db.TextProperty(required=True)
+    rss_comment = db.TextProperty(required=True,
+                                  default='New little comic update! Hooray!')
     pub_date = db.DateTimeProperty(auto_now_add=True)
 
 

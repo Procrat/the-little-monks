@@ -14,7 +14,7 @@
       <link>{{ base }}{{ comic.nr }}</link>
       <guid>{{ base }}{{ comic.nr }}</guid>
       <pubDate>{{ comic.pub_date.strftime('%a, %d %b %y %H:%M:%S UT') }}</pubDate>
-      <description>New little comic update! Hooray!</description>
+      <description>{{ comic.rss_comment }}</description>
     </item>
     {% endfor %}
   </channel>
