@@ -28,81 +28,90 @@ class ManagePage(BlobstoreUploadHandler):
                           'change_rss_comment'):
             return self.error(403)
         try:
-            getattr(self, action)(self.request.POST)
+            getattr(self, action)()
             self.redirect('/manage')
-        except ValueError:
+        except ValueError as error:
             self.error(405)
-            self.response.out.write('That doesn\'t seem right to me, liefje!')
+            self.response.out.write('Whoopsiedaisy! ' + str(error))
 
-    def add(self, POST):
-        title = POST.get('title')
+    def add(self):
+        title = self.param('title')
         uploads = self.get_uploads('image')
-        comment = POST.get('comment')
-        title_margin = int(POST.get('title_margin'))
-        rss_comment = POST.get('rss_comment')
-        if (title is None or not uploads or comment is None
-                or title_margin < 0 or rss_comment is None):
-            raise ValueError
+        comment = self.param('comment')
+        title_margin = self.param('title_margin', int)
+        rss_comment = self.param('rss_comment')
+        if not uploads:
+            raise ValueError('Ik denk dat je geen bestand geselecteerd hebt.')
+
         latest = Comic.all().order('-nr').get()
         nr = latest.nr + 1 if latest else 1
         (width, height, blob) = handle_image(uploads[0])
+
         Comic(nr=nr, title=title, image=blob, width=width, height=height,
               comment=comment, title_margin=title_margin,
               rss_comment=rss_comment).put()
 
-    def remove(self, POST):
+    def remove(self):
         to_del = Comic.all().order('-nr').get()
         if to_del is None:
             raise ValueError
         to_del.delete()
 
-    def rename(self, POST):
-        nr = POST.get('nr')
-        name = POST.get('name')
-        comic = Comic.all().filter('nr =', int(nr)).get()
-        if comic is None or name is None:
-            raise ValueError
+    def rename(self):
+        nr = self.param('nr', int)
+        name = self.param('name')
+
+        comic = Comic.all().filter('nr =', nr).get()
         comic.title = name
         comic.put()
 
-    def change_image(self, POST):
+    def change_image(self):
         uploads = self.get_uploads('image')
-        nr = POST.get('nr')
-        comic = Comic.all().filter('nr =', int(nr)).get()
-        if comic is None or not uploads:
-            raise ValueError
+        nr = self.param('nr', int)
+
+        comic = Comic.all().filter('nr =', nr).get()
         (width, height, blob) = handle_image(uploads[0])
         comic.width = width
         comic.height = height
         comic.image = blob
         comic.put()
 
-    def change_comment(self, POST):
-        nr = POST.get('nr')
-        comment = POST.get('comment')
-        comic = Comic.all().filter('nr =', int(nr)).get()
-        if comic is None or comment is None:
-            raise ValueError
+    def change_comment(self):
+        nr = self.param('nr', int)
+        comment = self.param('comment')
+
+        comic = Comic.all().filter('nr =', nr).get()
         comic.comment = comment
         comic.put()
 
-    def change_title_margin(self, POST):
-        nr = int(POST.get('nr'))
-        title_margin = int(POST.get('title_margin'))
+    def change_title_margin(self):
+        nr = self.param('nr', int)
+        title_margin = self.param('title_margin', int)
+
         comic = Comic.all().filter('nr =', nr).get()
-        if comic is None or title_margin < 0:
-            raise ValueError
         comic.title_margin = title_margin
         comic.put()
 
-    def change_rss_comment(self, POST):
-        nr = int(POST.get('nr'))
-        rss_comment = POST.get('rss_comment')
+    def change_rss_comment(self):
+        nr = self.param('nr', int)
+        rss_comment = self.param('rss_comment')
+
         comic = Comic.all().filter('nr =', nr).get()
-        if comic is None or rss_comment is None or len(rss_comment) == 0:
-            raise ValueError
         comic.rss_comment = rss_comment
         comic.put()
+
+    def param(self, name, cast_function=None):
+        raw_value = self.request.POST.get(name)
+        if not raw_value:
+            raise ValueError(name + ' kan niet leeg zijn.')
+        if cast_function is None:
+            return raw_value
+        else:
+            try:
+                return cast_function(raw_value)
+            except ValueError as cast_error:
+                raise ValueError(name + ' kon niet omgezet worden (%s)' %
+                                 cast_error)
 
 
 def handle_image(blob_info):
