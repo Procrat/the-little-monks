@@ -20,7 +20,7 @@ class RSSPage(RequestHandler):
         from datetime import datetime
         self.response.content_type = 'application/rss+xml'
         render_page(self, 'rss.xml', {
-            'comics': list(Comic.all().order('pub_date')),
+            'comics': list(Comic.all().order('-pub_date')),
             'year': datetime.now().year,
         })
 
