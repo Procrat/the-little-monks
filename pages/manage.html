@@ -47,7 +47,7 @@
     <table>
       {% for comic in comics %}
         <tr>
-          <td>{{ loop.index }}.</td>
+          <td>{{ comic.nr }}.</td>
           <td>{{ comic.title }}</td>
           <td class="veld">
             <form enctype="multipart/form-data" method="post" action="/manage">
