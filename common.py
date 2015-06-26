@@ -53,8 +53,8 @@ def _ensure_latest_published_exists():
     latest = LatestPublishedComic.all().get()
     if latest is None:
         latest_comic = Comic.all().order('-nr').get()
-        nr = latest_comic if latest_comic is not None else 0
-        LatestPublishedComic(nr=nr).save()
+        nr = latest_comic.nr if latest_comic is not None else 0
+        LatestPublishedComic(nr=nr).put()
 
 _ensure_latest_published_exists()
 
