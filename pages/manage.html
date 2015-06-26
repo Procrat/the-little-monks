@@ -53,14 +53,14 @@
     <h2>Change comics</h2>
     <table>
       {% for comic in comics %}
-        <tr>
+        <tr {% if comic.nr > latest_published_nr %}style="background: lightgray"{% endif %}>
           <td>{{ comic.nr }}.</td>
           <td>{{ comic.title }}</td>
           <td class="veld">
             <form enctype="multipart/form-data" method="post" action="/manage">
               <input type="hidden" name="action" value="publish" />
               <input type="hidden" name="nr" value="{{ comic.nr }}" />
-              <input type="submit" value="Publish" />
+              <input type="submit" value="{{ 'Publish' if comic.nr > latest_published_nr else 'Publish till this comic' }}" />
             </form>
             <form enctype="multipart/form-data" method="post" action="/manage">
               <input type="hidden" name="action" value="rename" />
