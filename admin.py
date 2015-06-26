@@ -5,7 +5,8 @@ from google.appengine.ext import blobstore, db
 from google.appengine.ext.webapp.blobstore_handlers \
     import BlobstoreUploadHandler
 
-from common import render_page, Comic
+from common import (render_page, Comic, get_latest_published_nr,
+                    set_latest_published_nr, get_comic)
 
 
 class ManagePage(BlobstoreUploadHandler):
@@ -15,24 +16,28 @@ class ManagePage(BlobstoreUploadHandler):
         comics = Comic.all().order('-nr')
         logout_url = users.create_logout_url('/')
         upload_url = blobstore.create_upload_url('/manage')
-        render_page(self, 'manage.html', {'comics': comics,
-                                          'logout_url': logout_url,
-                                          'upload_url': upload_url})
+        template_vars = {
+            'comics': comics,
+            'latest_published_nr': get_latest_published_nr(),
+            'logout_url': logout_url,
+            'upload_url': upload_url,
+        }
+        render_page(self, 'manage.html', template_vars)
 
     def post(self):
         if not users.is_current_user_admin():  # Double check
             return self.error(401)
         action = self.request.POST.get('action')
-        if action not in ('add', 'remove', 'rename', 'change_image',
+        if action not in ('add', 'remove', 'publish', 'rename', 'change_image',
                           'change_comment', 'change_title_margin',
-                          'change_rss_comment'):
+                          'change_rss_comment', 'change_latest'):
             return self.error(403)
         try:
             getattr(self, action)()
             self.redirect('/manage')
-        except ValueError as error:
+        except Exception as exception:
             self.error(405)
-            self.response.out.write('Whoopsiedaisy! ' + str(error))
+            self.response.out.write('Whoopsiedaisy! ' + str(exception))
 
     def add(self):
         title = self.param('title')
@@ -57,11 +62,16 @@ class ManagePage(BlobstoreUploadHandler):
             raise ValueError
         to_del.delete()
 
+    def publish(self):
+        nr = self.param('nr', int)
+
+        set_latest_published_nr(nr)
+
     def rename(self):
         nr = self.param('nr', int)
         name = self.param('name')
 
-        comic = Comic.all().filter('nr =', nr).get()
+        comic = get_comic(nr)
         comic.title = name
         comic.put()
 
@@ -69,7 +79,7 @@ class ManagePage(BlobstoreUploadHandler):
         uploads = self.get_uploads('image')
         nr = self.param('nr', int)
 
-        comic = Comic.all().filter('nr =', nr).get()
+        comic = get_comic(nr)
         (width, height, blob) = handle_image(uploads[0])
         comic.width = width
         comic.height = height
@@ -80,7 +90,7 @@ class ManagePage(BlobstoreUploadHandler):
         nr = self.param('nr', int)
         comment = self.param('comment')
 
-        comic = Comic.all().filter('nr =', nr).get()
+        comic = get_comic(nr)
         comic.comment = comment
         comic.put()
 
@@ -88,7 +98,7 @@ class ManagePage(BlobstoreUploadHandler):
         nr = self.param('nr', int)
         title_margin = self.param('title_margin', int)
 
-        comic = Comic.all().filter('nr =', nr).get()
+        comic = get_comic(nr)
         comic.title_margin = title_margin
         comic.put()
 
@@ -96,9 +106,14 @@ class ManagePage(BlobstoreUploadHandler):
         nr = self.param('nr', int)
         rss_comment = self.param('rss_comment')
 
-        comic = Comic.all().filter('nr =', nr).get()
+        comic = get_comic(nr)
         comic.rss_comment = rss_comment
         comic.put()
+
+    def change_latest(self):
+        nr = self.param('nr', int)
+
+        set_latest_published_nr(nr)
 
     def param(self, name, cast_function=None):
         raw_value = self.request.POST.get(name)

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from webapp2 import RequestHandler
-from common import render_page, not_found, Comic
+from common import render_page, not_found, get_published_comics, get_comic
 
 
 class AboutPage(RequestHandler):
@@ -20,7 +20,7 @@ class RSSPage(RequestHandler):
         from datetime import datetime
         self.response.content_type = 'application/rss+xml'
         render_page(self, 'rss.xml', {
-            'comics': list(Comic.all().order('-pub_date')),
+            'comics': list(get_published_comics()),
             'year': datetime.now().year,
         })
 
@@ -46,7 +46,7 @@ class ImageHandler(RequestHandler):
             nr = int(nr)
         except:
             return not_found(self)
-        comic = Comic.all().filter('nr =', nr).get()
+        comic = get_comic(nr)
         if comic is None or comic.image is None:
             return not_found(self)
         self.response.headers['Content-Type'] = 'image/png'

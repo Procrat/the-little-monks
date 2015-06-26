@@ -3,6 +3,7 @@
 import os
 
 import jinja2
+from google.appengine.api import memcache
 from google.appengine.ext import db
 
 
@@ -26,6 +27,44 @@ class Comic(db.Model):
     rss_comment = db.TextProperty(required=True,
                                   default='New little comic update! Hooray!')
     pub_date = db.DateTimeProperty(auto_now_add=True)
+
+
+class LatestPublishedComic(db.Model):
+    nr = db.IntegerProperty(required=True)
+
+
+def get_latest_published_nr():
+    nr = memcache.get('latest_published_nr')
+    if nr is None:
+        nr = LatestPublishedComic.all().get().nr
+        memcache.add('latest_published_nr', nr, 12 * 60 * 60)
+    return nr
+
+
+def set_latest_published_nr(nr):
+    latest_comic = LatestPublishedComic.all().get()
+    if nr != latest_comic.nr:
+        latest_comic.nr = nr
+        latest_comic.save()
+        memcache.set('latest_published_nr', nr, 12 * 60 * 60)
+
+
+def _ensure_latest_published_exists():
+    latest = LatestPublishedComic.all().get()
+    if latest is None:
+        latest_comic = Comic.all().order('-nr').get()
+        nr = latest_comic if latest_comic is not None else 0
+        LatestPublishedComic(nr=nr).save()
+
+_ensure_latest_published_exists()
+
+
+def get_comic(nr):
+    return Comic.all().filter('nr =', nr).get()
+
+
+def get_published_comics():
+    return Comic.all().filter('nr <=', get_latest_published_nr()).order('-nr')
 
 
 def render_page(req_handler, filename, template_dict=None):

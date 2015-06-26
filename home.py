@@ -4,24 +4,25 @@ import urllib
 
 import webapp2
 
-from common import Comic, render_page, LOC
+from common import render_page, LOC, get_latest_published_nr, get_comic
 
 
 class MainPage(webapp2.RequestHandler):
     def get(self, nr):
+        latest_nr = get_latest_published_nr()
+
         # Check if there are any comics
-        latest_comic = Comic.all().order('-nr').get()
-        if not latest_comic:
-            return self.response.out.write('Upload first comic plz. kthxbai.')
+        if latest_nr < 1:
+            upload_plz = 'Upload/publish first comic plz. kthxbai.'
+            return self.response.out.write(upload_plz)
 
         # Redirect to the latest comic if the number exceeds the latest one
-        latest_nr = latest_comic.nr
         nr = int(nr) if nr else latest_nr
         if nr > latest_nr:
             return self.redirect('/%d' % latest_nr)
 
         # Get the corresponding comic
-        comic = Comic.all().filter('nr =', nr).get()
+        comic = get_comic(nr)
 
         # Fill data dict and render
         dic = {'latest': latest_nr,

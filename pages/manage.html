@@ -37,6 +37,13 @@
       <input type="submit" value="Add comic" />
     </p></form>
     <hr />
+    <h2>Latest published comic</h2>
+    <form enctype="multipart/form-data" method="post" action="/manage"><p>
+      <input type="hidden" name="action" value="change_latest" />
+      <input type="text" name="nr" value="{{ latest_published_nr }}" />
+      <input type="submit" value="Set" />
+    </p></form>
+    <hr />
     <h2>Remove comic</h2>
     <form enctype="multipart/form-data" method="post" action="/manage"><p>
       <input type="hidden" name="action" value="remove" />
@@ -50,6 +57,11 @@
           <td>{{ comic.nr }}.</td>
           <td>{{ comic.title }}</td>
           <td class="veld">
+            <form enctype="multipart/form-data" method="post" action="/manage">
+              <input type="hidden" name="action" value="publish" />
+              <input type="hidden" name="nr" value="{{ comic.nr }}" />
+              <input type="submit" value="Publish" />
+            </form>
             <form enctype="multipart/form-data" method="post" action="/manage">
               <input type="hidden" name="action" value="rename" />
               <input type="hidden" name="nr" value="{{ comic.nr }}" />
