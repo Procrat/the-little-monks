@@ -43,6 +43,10 @@
       <input type="text" name="nr" value="{{ latest_published_nr }}" />
       <input type="submit" value="Set" />
     </p></form>
+    <form enctype="multipart/form-data" method="post" action="/manage"><p>
+      <input type="hidden" name="action" value="publish_one_more" />
+      <input type="submit" value="Publish one more comic" />
+    </p></form>
     <hr />
     <h2>Remove comic</h2>
     <form enctype="multipart/form-data" method="post" action="/manage"><p>

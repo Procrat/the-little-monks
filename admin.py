@@ -4,9 +4,10 @@ from google.appengine.api import users, images
 from google.appengine.ext import blobstore, db
 from google.appengine.ext.webapp.blobstore_handlers \
     import BlobstoreUploadHandler
+import webapp2
 
 from common import (render_page, Comic, get_latest_published_nr,
-                    set_latest_published_nr, get_comic)
+                    set_latest_published_nr, publish_one_more, get_comic)
 
 
 class ManagePage(BlobstoreUploadHandler):
@@ -28,9 +29,10 @@ class ManagePage(BlobstoreUploadHandler):
         if not users.is_current_user_admin():  # Double check
             return self.error(401)
         action = self.request.POST.get('action')
-        if action not in ('add', 'remove', 'publish', 'rename', 'change_image',
+        if action not in ('add', 'remove', 'change_latest', 'publish_one_more',
+                          'publish', 'rename', 'change_image',
                           'change_comment', 'change_title_margin',
-                          'change_rss_comment', 'change_latest'):
+                          'change_rss_comment',):
             return self.error(403)
         try:
             getattr(self, action)()
@@ -61,6 +63,14 @@ class ManagePage(BlobstoreUploadHandler):
         if to_del is None:
             raise ValueError
         to_del.delete()
+
+    def change_latest(self):
+        nr = self.param('nr', int)
+
+        set_latest_published_nr(nr)
+
+    def publish_one_more(self):
+        publish_one_more()
 
     def publish(self):
         nr = self.param('nr', int)
@@ -110,11 +120,6 @@ class ManagePage(BlobstoreUploadHandler):
         comic.rss_comment = rss_comment
         comic.put()
 
-    def change_latest(self):
-        nr = self.param('nr', int)
-
-        set_latest_published_nr(nr)
-
     def param(self, name, cast_function=None):
         raw_value = self.request.POST.get(name)
         if not raw_value:
@@ -127,6 +132,11 @@ class ManagePage(BlobstoreUploadHandler):
             except ValueError as cast_error:
                 raise ValueError(name + ' kon niet omgezet worden (%s)' %
                                  cast_error)
+
+
+class PublishNewComicJob(webapp2.RequestHandler):
+    def get(self):
+        publish_one_more()
 
 
 def handle_image(blob_info):

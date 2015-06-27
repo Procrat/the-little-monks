@@ -67,6 +67,15 @@ def get_published_comics():
     return Comic.all().filter('nr <=', get_latest_published_nr()).order('-nr')
 
 
+def publish_one_more():
+    latest_comic = Comic.all().order('-nr').get()
+    if latest_comic is None:
+        return
+
+    latest_nr = min(get_latest_published_nr(), latest_comic.nr)
+    set_latest_published_nr(latest_nr + 1)
+
+
 def render_page(req_handler, filename, template_dict=None):
     if template_dict is None:
         template_dict = {}

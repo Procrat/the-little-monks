@@ -9,9 +9,9 @@ handlers:
 - url: /static
   static_dir: static
 
-- url: /manage
+- url: /manage/.*
   script: request_handler.app
-  #secure: always
+  secure: always
   login: admin
 
 - url: /_ah/login_required

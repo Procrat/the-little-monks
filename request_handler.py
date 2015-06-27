@@ -2,7 +2,10 @@
 # -*- coding: utf-8 -*-
 import webapp2
 
-import home, admin, other, contact
+import home
+import admin
+import other
+import contact
 
 
 pages = [('0', other.ZeroEasterPage),
@@ -11,6 +14,7 @@ pages = [('0', other.ZeroEasterPage),
          ('about', other.AboutPage),
          ('about_monks', other.AboutMonksPage),
          ('manage', admin.ManagePage),
+         ('manage/publish_new_comic', admin.PublishNewComicJob),
          ('rss', other.RSSPage),
          ('contact', contact.ContactPage),
          ('.*', other.NotFoundPage)]
