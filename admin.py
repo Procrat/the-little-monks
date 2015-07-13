@@ -12,8 +12,6 @@ from common import (render_page, Comic, get_latest_published_nr,
 
 class ManagePage(BlobstoreUploadHandler):
     def get(self):
-        if not users.is_current_user_admin():  # Double check
-            return self.error(401)
         comics = Comic.all().order('-nr')
         logout_url = users.create_logout_url('/')
         upload_url = blobstore.create_upload_url('/manage')
@@ -26,8 +24,6 @@ class ManagePage(BlobstoreUploadHandler):
         render_page(self, 'manage.html', template_vars)
 
     def post(self):
-        if not users.is_current_user_admin():  # Double check
-            return self.error(401)
         action = self.request.POST.get('action')
         if action not in ('add', 'remove', 'change_latest', 'publish_one_more',
                           'publish', 'rename', 'change_image',
