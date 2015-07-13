@@ -11,7 +11,7 @@ handlers:
 
 - url: /manage/.*
   script: request_handler.app
-  secure: always
+  # secure: always
   login: admin
 
 - url: /_ah/login_required
