@@ -10,10 +10,12 @@ from google.appengine.ext import db
 LOC_ = 'http://thelittlemonks.com'
 LOC = LOC_ + '/'
 
+ROOT = os.path.join(os.path.dirname(__file__), '..')
 JINJA_ENVIRONMENT = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    loader=jinja2.FileSystemLoader(ROOT),
     extensions=['jinja2.ext.autoescape'],
     autoescape=True)
+JINJA_ENVIRONMENT.globals.update(zip=zip)
 
 
 class Comic(db.Model):
@@ -79,7 +81,8 @@ def publish_one_more():
 def render_page(req_handler, filename, template_dict=None):
     if template_dict is None:
         template_dict = {}
-    template = JINJA_ENVIRONMENT.get_template(os.path.join('pages', filename))
+    template_path = os.path.join('pages', filename)
+    template = JINJA_ENVIRONMENT.get_template(template_path)
     template_dict['base'] = LOC
     req_handler.response.write(template.render(template_dict))
 

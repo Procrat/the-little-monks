@@ -2,10 +2,14 @@
 # -*- coding: utf-8 -*-
 import webapp2
 
-import home
+# Add source folder to PYTHONPATH
+import sys
+sys.path.append('src')
+
 import admin
-import other
 import contact
+import home
+import other
 
 
 pages = [('0', other.ZeroEasterPage),

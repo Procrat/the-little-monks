@@ -5,22 +5,30 @@ from google.appengine.ext import blobstore, db
 from google.appengine.ext.webapp.blobstore_handlers \
     import BlobstoreUploadHandler
 import webapp2
+from datetime import datetime
 
 from common import (render_page, Comic, get_latest_published_nr,
-                    set_latest_published_nr, publish_one_more, get_comic)
+                    set_latest_published_nr, publish_one_more, get_comic,
+                    get_published_comics)
 
 
 class ManagePage(BlobstoreUploadHandler):
     def get(self):
         if not users.is_current_user_admin():  # Double check
             return self.error(401)
+
         comics = Comic.all().order('-nr')
+        publish_dates = [date.strftime('%c') for date in find_publish_dates()]
         logout_url = users.create_logout_url('/')
         upload_url = blobstore.create_upload_url('/manage')
+        system_time = datetime.now().strftime('%c')
+
         template_vars = {
             'comics': comics,
+            'publish_dates': publish_dates,
             'latest_published_nr': get_latest_published_nr(),
             'logout_url': logout_url,
+            'system_time': system_time,
             'upload_url': upload_url,
         }
         render_page(self, 'manage.html', template_vars)
@@ -28,6 +36,7 @@ class ManagePage(BlobstoreUploadHandler):
     def post(self):
         if not users.is_current_user_admin():  # Double check
             return self.error(401)
+
         action = self.request.POST.get('action')
         if action not in ('add', 'remove', 'change_latest', 'publish_one_more',
                           'publish', 'rename', 'change_image',
@@ -145,3 +154,44 @@ def handle_image(blob_info):
     image_data = image.execute_transforms(quality=100)
     blob_info.delete()
     return (image.width, image.height, db.Blob(image_data))
+
+
+def find_publish_dates():
+    """Makes a list of publish dates of all comics.
+
+    This is done by combining the publish dates of already published comics
+    (which is saved as an attribute) and calculating the coming publish dates
+    by parsing the publish schedule in cron.yaml.
+    """
+    comics = Comic.all().order('-nr')
+
+    if comics.count() == 0:
+        return []
+
+    latest_uploaded_comic = comics.get().nr
+    amount_to_publish = latest_uploaded_comic - get_latest_published_nr()
+    schedule_str = _find_publish_schedule_string()
+    publish_dates = _find_next_publish_dates(schedule_str, amount_to_publish)
+
+    publish_dates += [comic.pub_date for comic in get_published_comics()]
+
+    return publish_dates
+
+
+def _find_publish_schedule_string():
+    import os.path
+    import yaml
+
+    with open(os.path.realpath(os.path.join('cron.yaml'))) as cron_file:
+        cron_doc = yaml.load(cron_file)['cron']
+        return [job['schedule'] for job in cron_doc
+                if job['description'] == 'Publish new comic'][0]
+
+
+def _find_next_publish_dates(schedule_str, n):
+    from google.appengine.cron import groctimespecification
+
+    specification = groctimespecification.GrocTimeSpecification(schedule_str)
+    next_dates = specification.GetMatches(datetime.now(), n)
+    next_dates.reverse()
+    return next_dates

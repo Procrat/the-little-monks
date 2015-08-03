@@ -20,10 +20,13 @@
   </style>
   </head>
   <body>
-    <div style="float:right">
+    <div style="float:right; margin: 5px">
       <form method="get" action="{{ logout_url }}">
         <input type="submit" value="Logout" />
       </form>
+    </div>
+    <div style="float:right; margin: 5px">
+      {{ system_time }}
     </div>
 
     <h2>Add comic</h2>
@@ -56,7 +59,7 @@
     <hr />
     <h2>Change comics</h2>
     <table>
-      {% for comic in comics %}
+      {% for comic, publish_date in zip(comics, publish_dates) %}
         <tr {% if comic.nr > latest_published_nr %}style="background: lightgray"{% endif %}>
           <td>{{ comic.nr }}.</td>
           <td>{{ comic.title }}</td>
@@ -97,6 +100,7 @@
               <input type="submit" value="Change RSS comment" />
             </form>
           </td>
+          <td>{{ publish_date }}</td>
         </tr>
       {% endfor %}
     </table>
