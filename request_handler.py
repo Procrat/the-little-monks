@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 import webapp2
 
-# Add source folder to PYTHONPATH
+# Add source and libraries folder to PYTHONPATH
 import sys
-sys.path.append('src')
+sys.path.extend(['src', 'lib'])
 
 import admin
 import contact
