@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os
+from datetime import datetime
 
 import jinja2
 from google.appengine.api import memcache
@@ -28,7 +29,7 @@ class Comic(db.Model):
     comment = db.TextProperty(required=True)
     rss_comment = db.TextProperty(required=True,
                                   default='New little comic update! Hooray!')
-    pub_date = db.DateTimeProperty(auto_now_add=True)
+    pub_date = db.DateTimeProperty()
 
 
 class LatestPublishedComic(db.Model):
@@ -75,6 +76,9 @@ def publish_one_more():
         return
 
     latest_nr = min(get_latest_published_nr(), latest_comic.nr)
+    new_comic = get_comic(latest_nr + 1)
+    new_comic.pub_date = datetime.now()
+    new_comic.save()
     set_latest_published_nr(latest_nr + 1)
 
 
