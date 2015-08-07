@@ -37,6 +37,7 @@
       Comment: <input type="text" name="comment" /><br />
       Margin with title: <input type="text" name="title_margin" value="0" /><br />
       RSS comment: <input type="text" name="rss_comment" /><br />
+      RSS thumbnail: <input type="file" name="thumbnail" /><br />
       <input type="submit" value="Add comic" />
     </p></form>
     <hr />
@@ -62,7 +63,12 @@
       {% for comic, publish_date in zip(comics, publish_dates) %}
         <tr {% if comic.nr > latest_published_nr %}style="background: lightgray"{% endif %}>
           <td>{{ comic.nr }}.</td>
-          <td>{{ comic.title }}</td>
+          <td style="text-align: center">
+            {{ comic.title }}<br />
+            {% if comic.thumbnail %}
+              {{ comic.thumbnail_url|img_tag(90, 90)|safe }}
+            {% endif %}
+          </td>
           <td class="veld">
             <form enctype="multipart/form-data" method="post" action="/manage">
               <input type="hidden" name="action" value="publish" />
@@ -98,6 +104,12 @@
               <input type="hidden" name="nr" value="{{ comic.nr }}" />
               <input type="text" name="rss_comment" value="{{ comic.rss_comment }}" />
               <input type="submit" value="Change RSS comment" />
+            </form>
+            <form enctype="multipart/form-data" method="post" action="{{ upload_url }}">
+              <input type="hidden" name="action" value="change_thumbnail" />
+              <input type="hidden" name="nr" value="{{ comic.nr }}" />
+              <input type="file" name="thumbnail" />
+              <input type="submit" value="Change thumbnail" />
             </form>
           </td>
           <td>{{ publish_date }}</td>

@@ -2,7 +2,12 @@
 # -*- coding: utf-8 -*-
 
 from webapp2 import RequestHandler
-from common import render_page, not_found, get_published_comics, get_comic
+from common import (render_page, not_found, get_published_comics,
+                    get_published_comic, _get_comic)
+from google.appengine.api import users
+from google.appengine.ext.webapp.blobstore_handlers \
+    import BlobstoreDownloadHandler
+from google.appengine.ext import blobstore
 
 
 class AboutPage(RequestHandler):
@@ -41,13 +46,39 @@ class ZeroEasterPage(RequestHandler):
 
 
 class ImageHandler(RequestHandler):
+    # TODO merge this to blobstore
+
     def get(self, nr):
         try:
             nr = int(nr)
         except:
             return not_found(self)
-        comic = get_comic(nr)
+
+        comic = get_published_comic(nr)
+
         if comic is None or comic.image is None:
             return not_found(self)
+
         self.response.headers['Content-Type'] = 'image/png'
         self.response.out.write(comic.image)
+
+
+class ThumbnailHandler(BlobstoreDownloadHandler):
+    def get(self, nr):
+        try:
+            nr = int(nr)
+        except:
+            return not_found(self)
+
+        if users.is_current_user_admin():
+            comic = _get_comic(nr)
+        else:
+            comic = get_published_comic(nr)
+
+        if (comic is None or
+                comic.thumbnail is None or
+                not blobstore.get(comic.thumbnail.key())):
+            return not_found(self)
+
+        self.response.headers['Content-Type'] = 'image/png'
+        self.send_blob(comic.thumbnail)

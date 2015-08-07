@@ -4,7 +4,8 @@ import urllib
 
 import webapp2
 
-from common import render_page, LOC, get_latest_published_nr, get_comic
+from common import (render_page, LOC, get_latest_published_nr,
+                    get_published_comic)
 
 
 class MainPage(webapp2.RequestHandler):
@@ -22,7 +23,7 @@ class MainPage(webapp2.RequestHandler):
             return self.redirect('/%d' % latest_nr)
 
         # Get the corresponding comic
-        comic = get_comic(nr)
+        comic = get_published_comic(nr)
 
         # Fill data dict and render
         dic = {'latest': latest_nr,

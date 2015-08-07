@@ -11,10 +11,13 @@ import contact
 import home
 import other
 
+import common
+common.ensure_latest_published_exists()
 
 pages = [('0', other.ZeroEasterPage),
          ('([0-9]*)', home.MainPage),
          ('comic/(.*)', other.ImageHandler),
+         ('thumb/(.*)', other.ThumbnailHandler),
          ('about', other.AboutPage),
          ('about_monks', other.AboutMonksPage),
          ('manage', admin.ManagePage),

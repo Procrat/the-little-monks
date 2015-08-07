@@ -8,7 +8,7 @@ import webapp2
 from datetime import datetime
 
 from common import (render_page, Comic, get_latest_published_nr,
-                    set_latest_published_nr, publish_one_more, get_comic,
+                    set_latest_published_nr, publish_one_more, _get_comic,
                     get_published_comics)
 
 
@@ -41,7 +41,7 @@ class ManagePage(BlobstoreUploadHandler):
         if action not in ('add', 'remove', 'change_latest', 'publish_one_more',
                           'publish', 'rename', 'change_image',
                           'change_comment', 'change_title_margin',
-                          'change_rss_comment',):
+                          'change_rss_comment', 'change_thumbnail'):
             return self.error(403)
         try:
             getattr(self, action)()
@@ -52,20 +52,19 @@ class ManagePage(BlobstoreUploadHandler):
 
     def add(self):
         title = self.param('title')
-        uploads = self.get_uploads('image')
+        image_blobinfo = self.get_upload('image')
         comment = self.param('comment')
         title_margin = self.param('title_margin', int)
         rss_comment = self.param('rss_comment')
-        if not uploads:
-            raise ValueError('Ik denk dat je geen bestand geselecteerd hebt.')
+        thumbnail_blobinfo = self.get_upload('thumbnail', required=False)
 
         latest = Comic.all().order('-nr').get()
         nr = latest.nr + 1 if latest else 1
-        (width, height, blob) = handle_image(uploads[0])
+        width, height, image_blob = handle_image(image_blobinfo)
 
-        Comic(nr=nr, title=title, image=blob, width=width, height=height,
+        Comic(nr=nr, title=title, image=image_blob, width=width, height=height,
               comment=comment, title_margin=title_margin,
-              rss_comment=rss_comment).put()
+              rss_comment=rss_comment, thumbnail=thumbnail_blobinfo).put()
 
     def remove(self):
         to_del = Comic.all().order('-nr').get()
@@ -90,16 +89,16 @@ class ManagePage(BlobstoreUploadHandler):
         nr = self.param('nr', int)
         name = self.param('name')
 
-        comic = get_comic(nr)
+        comic = _get_comic(nr)
         comic.title = name
         comic.put()
 
     def change_image(self):
-        uploads = self.get_uploads('image')
+        image_blobinfo = self.get_upload('image')
         nr = self.param('nr', int)
 
-        comic = get_comic(nr)
-        (width, height, blob) = handle_image(uploads[0])
+        comic = _get_comic(nr)
+        width, height, blob = handle_image(image_blobinfo)
         comic.width = width
         comic.height = height
         comic.image = blob
@@ -109,7 +108,7 @@ class ManagePage(BlobstoreUploadHandler):
         nr = self.param('nr', int)
         comment = self.param('comment')
 
-        comic = get_comic(nr)
+        comic = _get_comic(nr)
         comic.comment = comment
         comic.put()
 
@@ -117,7 +116,7 @@ class ManagePage(BlobstoreUploadHandler):
         nr = self.param('nr', int)
         title_margin = self.param('title_margin', int)
 
-        comic = get_comic(nr)
+        comic = _get_comic(nr)
         comic.title_margin = title_margin
         comic.put()
 
@@ -125,8 +124,16 @@ class ManagePage(BlobstoreUploadHandler):
         nr = self.param('nr', int)
         rss_comment = self.param('rss_comment')
 
-        comic = get_comic(nr)
+        comic = _get_comic(nr)
         comic.rss_comment = rss_comment
+        comic.put()
+
+    def change_thumbnail(self):
+        thumbnail_blobinfo = self.get_upload('thumbnail')
+        nr = self.param('nr', int)
+
+        comic = _get_comic(nr)
+        comic.thumbnail = thumbnail_blobinfo
         comic.put()
 
     def param(self, name, cast_function=None):
@@ -142,6 +149,16 @@ class ManagePage(BlobstoreUploadHandler):
                 raise ValueError(name + ' kon niet omgezet worden (%s)' %
                                  cast_error)
 
+    def get_upload(self, name, required=True):
+        uploads = self.get_uploads(name)
+        if uploads:
+            return uploads[0]
+        elif required:
+            raise ValueError(name + ' werd niet geüpload. Heb je een bestand '
+                             'geselecteerd?')
+        else:
+            return None
+
 
 class PublishNewComicJob(webapp2.RequestHandler):
     def get(self):
@@ -153,7 +170,7 @@ def handle_image(blob_info):
     image.resize(width=800)
     image_data = image.execute_transforms(quality=100)
     blob_info.delete()
-    return (image.width, image.height, db.Blob(image_data))
+    return image.width, image.height, db.Blob(image_data)
 
 
 def find_publish_dates():

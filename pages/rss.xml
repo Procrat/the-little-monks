@@ -14,7 +14,18 @@
       <link>{{ base }}{{ comic.nr }}</link>
       <guid>{{ base }}{{ comic.nr }}</guid>
       <pubDate>{{ comic.pub_date.strftime('%a, %d %b %y %H:%M:%S UT') }}</pubDate>
-      <description>{{ comic.rss_comment }}</description>
+      <description>
+        <![CDATA[
+          {% if comic.thumbnail %}
+            <a href="{{ base }}{{ comic.nr }}">
+              <img src="{{ comic.thumbnail_url }}"
+                  border="0" style="float: left; margin: 0px; padding: 8px 15px 8px 8px;" />
+            </a>
+          {% endif %}
+          <h2><a href="{{ base }}{{ comic.nr }}">{{ comic.title }}</a></h2>
+          <p>{{ comic.rss_comment }}</p>
+        ]]>
+      </description>
     </item>
     {% endfor %}
   </channel>
