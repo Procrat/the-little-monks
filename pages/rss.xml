@@ -15,7 +15,7 @@
       <title>Comic {{ comic.nr }}: {{ comic.title }}</title>
       <link>{{ base }}{{ comic.nr }}</link>
       <guid>{{ base }}{{ comic.nr }}</guid>
-      <pubDate>{{ comic.pub_date.strftime('%a, %d %b %y %H:%M:%S GMT') }}</pubDate>
+      <pubDate>{{ comic.pub_date.strftime('%a, %d %b %y %H:%M:%S UT') }}</pubDate>
       <description>{{ comic.rss_comment }}</description>
       <content:encoded>
         <![CDATA[
