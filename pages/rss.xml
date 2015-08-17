@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
   <channel>
     <title>The Little Monks</title>
     <link>{{ base }}</link>
@@ -14,7 +16,8 @@
       <link>{{ base }}{{ comic.nr }}</link>
       <guid>{{ base }}{{ comic.nr }}</guid>
       <pubDate>{{ comic.pub_date.strftime('%a, %d %b %y %H:%M:%S UT') }}</pubDate>
-      <description>
+      <description>{{ comic.rss_comment }}</description>
+      <content:encoded>
         <![CDATA[
           {% if comic.thumbnail %}
             <a href="{{ base }}{{ comic.nr }}">
@@ -25,7 +28,7 @@
           <h2><a href="{{ base }}{{ comic.nr }}">{{ comic.title }}</a></h2>
           <p>{{ comic.rss_comment }}</p>
         ]]>
-      </description>
+      </content:encoded>
     </item>
     {% endfor %}
   </channel>
