@@ -1,13 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from webapp2 import RequestHandler
-from common import (render_page, not_found, get_published_comics,
-                    get_published_comic, _get_comic)
+from datetime import datetime, time
+
 from google.appengine.api import users
-from google.appengine.ext.webapp.blobstore_handlers \
-    import BlobstoreDownloadHandler
 from google.appengine.ext import blobstore
+from google.appengine.ext.webapp.blobstore_handlers import \
+    BlobstoreDownloadHandler
+from webapp2 import RequestHandler
+
+from common import (_get_comic, get_published_comic, get_published_comics,
+                    not_found, render_page)
 
 
 class AboutPage(RequestHandler):
@@ -82,3 +85,12 @@ class ThumbnailHandler(BlobstoreDownloadHandler):
 
         self.response.headers['Content-Type'] = 'image/png'
         self.send_blob(comic.thumbnail)
+
+
+class ISTALAVONDPage(RequestHandler):
+    def get(self):
+        today = datetime.now().date()
+        evening = datetime.combine(today, time(hour=17, minute=30))
+        secs_till_evening = (evening - datetime.now()).total_seconds()
+        template_dict = {'seconds_remaining': int(secs_till_evening)}
+        render_page(self, 'istalavond.html', template_dict)

@@ -24,6 +24,7 @@ pages = [('0', other.ZeroEasterPage),
          ('manage/publish_new_comic', admin.PublishNewComicJob),
          ('rss', other.RSSPage),
          ('contact', contact.ContactPage),
+         ('istalavond', other.ISTALAVONDPage),
          ('.*', other.NotFoundPage)]
 
 app = webapp2.WSGIApplication([('/' + x, y) for (x, y) in pages], debug=True)
