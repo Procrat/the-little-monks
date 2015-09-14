@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from datetime import datetime, time
+from datetime import datetime, time, tzinfo, timedelta
 
 from google.appengine.api import users
 from google.appengine.ext import blobstore
@@ -87,10 +87,21 @@ class ThumbnailHandler(BlobstoreDownloadHandler):
         self.send_blob(comic.thumbnail)
 
 
+class BrusselsTZ(tzinfo):
+    def utcoffset(self, dt):
+        return timedelta(hours=2)
+
+    def dst(self, dt):
+        return timedelta(0)
+
+    def tzname(self, dt):
+        return "Europe/Brussels"
+
+
 class ISTALAVONDPage(RequestHandler):
     def get(self):
-        today = datetime.now().date()
-        evening = datetime.combine(today, time(hour=17, minute=30))
-        secs_till_evening = (evening - datetime.now()).total_seconds()
+        now = datetime.now(tz=BrusselsTZ())
+        evening = datetime.combine(now, time(17, 30, tzinfo=BrusselsTZ()))
+        secs_till_evening = (evening - now).total_seconds()
         template_dict = {'seconds_remaining': int(secs_till_evening)}
         render_page(self, 'istalavond.html', template_dict)
