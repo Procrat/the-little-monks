@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os.path
-from datetime import datetime
+from datetime import datetime, tzinfo, timedelta
 
 import jinja2
 from google.appengine.api import memcache
@@ -75,6 +75,17 @@ def ensure_latest_published_exists():
         memcache.set('latest_published_nr', nr, 12 * 60 * 60)
 
 ensure_latest_published_exists()
+
+
+class BrusselsTZ(tzinfo):
+    def utcoffset(self, dt):
+        return timedelta(hours=1)
+
+    def dst(self, dt):
+        return timedelta(hours=1)
+
+    def tzname(self, dt):
+        return "Europe/Brussels"
 
 
 def _get_comic(nr):

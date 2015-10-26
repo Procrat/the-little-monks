@@ -7,7 +7,7 @@ from google.appengine.ext.webapp.blobstore_handlers \
 import webapp2
 from datetime import datetime
 
-from common import (render_page, Comic, get_latest_published_nr,
+from common import (BrusselsTZ, render_page, Comic, get_latest_published_nr,
                     set_latest_published_nr, publish_one_more, _get_comic,
                     get_published_comics)
 
@@ -21,7 +21,7 @@ class ManagePage(BlobstoreUploadHandler):
         publish_dates = [date.strftime('%c') for date in find_publish_dates()]
         logout_url = users.create_logout_url('/')
         upload_url = blobstore.create_upload_url('/manage')
-        system_time = datetime.now().strftime('%c')
+        system_time = datetime.now(tz=BrusselsTZ()).strftime('%c')
 
         template_vars = {
             'comics': comics,

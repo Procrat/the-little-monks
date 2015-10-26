@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from datetime import datetime, time, tzinfo, timedelta
+from datetime import datetime, time
 
 from google.appengine.api import users
 from google.appengine.ext import blobstore
@@ -9,8 +9,8 @@ from google.appengine.ext.webapp.blobstore_handlers import \
     BlobstoreDownloadHandler
 from webapp2 import RequestHandler
 
-from common import (_get_comic, get_published_comic, get_published_comics,
-                    not_found, render_page)
+from common import (BrusselsTZ, _get_comic, get_published_comic,
+                    get_published_comics, not_found, render_page)
 
 
 class AboutPage(RequestHandler):
@@ -85,17 +85,6 @@ class ThumbnailHandler(BlobstoreDownloadHandler):
 
         self.response.headers['Content-Type'] = 'image/png'
         self.send_blob(comic.thumbnail)
-
-
-class BrusselsTZ(tzinfo):
-    def utcoffset(self, dt):
-        return timedelta(hours=1)
-
-    def dst(self, dt):
-        return timedelta(hours=1)
-
-    def tzname(self, dt):
-        return "Europe/Brussels"
 
 
 class ISTALAVONDPage(RequestHandler):
