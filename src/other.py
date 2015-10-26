@@ -89,10 +89,10 @@ class ThumbnailHandler(BlobstoreDownloadHandler):
 
 class BrusselsTZ(tzinfo):
     def utcoffset(self, dt):
-        return timedelta(hours=2)
+        return timedelta(hours=1)
 
     def dst(self, dt):
-        return timedelta(0)
+        return timedelta(hours=1)
 
     def tzname(self, dt):
         return "Europe/Brussels"
