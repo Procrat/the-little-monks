@@ -81,6 +81,11 @@
          width="800" height="{{ comic.height * 800 // comic.width }}"
          style="margin-top: {{ comic.title_margin }}px"/>
   </div>
+  {% if comic.caption %}
+    <div class="caption">
+      {{ comic.caption|safe }}
+    </div>
+  {% endif %}
   <div class="comic_share">
     <a class="twitter" href="http://twitter.com/share?url={{ share_url }}&amp;hashtags=TheLittleMonks,FuckingHilarious" rel="_blank" title="Share on Twitter"></a>
     <a class="facebook" href="http://www.facebook.com/share.php?u={{ share_url }}&amp;title={{ share_title }}" rel="_blank" title="Share on Facebook"></a>

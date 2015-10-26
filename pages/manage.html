@@ -38,6 +38,7 @@
       Margin with title: <input type="text" name="title_margin" value="0" /><br />
       RSS comment: <input type="text" name="rss_comment" /><br />
       RSS thumbnail: <input type="file" name="thumbnail" /><br />
+      Caption: <input type="text" name="caption" /><br />
       <input type="submit" value="Add comic" />
     </p></form>
     <hr />
@@ -110,6 +111,12 @@
               <input type="hidden" name="nr" value="{{ comic.nr }}" />
               <input type="file" name="thumbnail" />
               <input type="submit" value="Change thumbnail" />
+            </form>
+            <form enctype="multipart/form-data" method="post" action="/manage">
+              <input type="hidden" name="action" value="change_caption" />
+              <input type="hidden" name="nr" value="{{ comic.nr }}" />
+              <input type="text" name="caption" value="{{ comic.caption }}" />
+              <input type="submit" value="Change caption" />
             </form>
           </td>
           <td>{{ publish_date }}</td>

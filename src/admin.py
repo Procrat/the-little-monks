@@ -18,7 +18,8 @@ class ManagePage(BlobstoreUploadHandler):
             return self.error(401)
 
         comics = Comic.all().order('-nr')
-        publish_dates = [date.strftime('%c') for date in find_publish_dates()]
+        publish_dates = [date.strftime('%c') if date else ''
+                         for date in find_publish_dates()]
         logout_url = users.create_logout_url('/')
         upload_url = blobstore.create_upload_url('/manage')
         system_time = datetime.now(tz=BrusselsTZ()).strftime('%c')
@@ -41,7 +42,8 @@ class ManagePage(BlobstoreUploadHandler):
         if action not in ('add', 'remove', 'change_latest', 'publish_one_more',
                           'publish', 'rename', 'change_image',
                           'change_comment', 'change_title_margin',
-                          'change_rss_comment', 'change_thumbnail'):
+                          'change_rss_comment', 'change_thumbnail',
+                          'change_caption'):
             return self.error(403)
         try:
             getattr(self, action)()
@@ -57,6 +59,7 @@ class ManagePage(BlobstoreUploadHandler):
         title_margin = self.param('title_margin', int)
         rss_comment = self.param('rss_comment')
         thumbnail_blobinfo = self.get_upload('thumbnail', required=False)
+        caption = self.param('caption', nullable=True) or None
 
         latest = Comic.all().order('-nr').get()
         nr = latest.nr + 1 if latest else 1
@@ -64,7 +67,8 @@ class ManagePage(BlobstoreUploadHandler):
 
         Comic(nr=nr, title=title, image=image_blob, width=width, height=height,
               comment=comment, title_margin=title_margin,
-              rss_comment=rss_comment, thumbnail=thumbnail_blobinfo).put()
+              rss_comment=rss_comment, thumbnail=thumbnail_blobinfo,
+              caption=caption).put()
 
     def remove(self):
         to_del = Comic.all().order('-nr').get()
@@ -136,9 +140,17 @@ class ManagePage(BlobstoreUploadHandler):
         comic.thumbnail = thumbnail_blobinfo
         comic.put()
 
-    def param(self, name, cast_function=None):
+    def change_caption(self):
+        nr = self.param('nr', int)
+        caption = self.param('caption')
+
+        comic = _get_comic(nr)
+        comic.caption = caption
+        comic.put()
+
+    def param(self, name, cast_function=None, nullable=False):
         raw_value = self.request.POST.get(name)
-        if not raw_value:
+        if not raw_value and not nullable:
             raise ValueError(name + ' kan niet leeg zijn.')
         if cast_function is None:
             return raw_value

@@ -33,6 +33,7 @@ class Comic(db.Model):
     thumbnail = blobstore.BlobReferenceProperty()
     rss_comment = db.TextProperty(required=True,
                                   default='New little comic update! Hooray!')
+    caption = db.TextProperty()
     pub_date = db.DateTimeProperty()
 
     @property
