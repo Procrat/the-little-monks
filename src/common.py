@@ -59,7 +59,7 @@ def set_latest_published_nr(new_nr):
         # Publish all comics between the previous latest and the new latest
         for nr in range(latest_comic.nr + 1, new_nr + 1):
             new_comic = _get_comic(nr)
-            new_comic.pub_date = datetime.now()
+            new_comic.pub_date = datetime.now(BrusselsTZ())
             new_comic.save()
 
         latest_comic.nr = new_nr
