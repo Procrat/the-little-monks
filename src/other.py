@@ -66,6 +66,25 @@ class ImageHandler(RequestHandler):
         self.response.out.write(comic.image)
 
 
+class AdminImageHandler(RequestHandler):
+    def get(self, nr):
+        if not users.is_current_user_admin():  # Double check
+            return self.error(401)
+
+        try:
+            nr = int(nr)
+        except:
+            return not_found(self)
+
+        comic = _get_comic(nr)
+
+        if comic is None or comic.image is None:
+            return not_found(self)
+
+        self.response.headers['Content-Type'] = 'image/png'
+        self.response.out.write(comic.image)
+
+
 class ThumbnailHandler(BlobstoreDownloadHandler):
     def get(self, nr):
         try:
