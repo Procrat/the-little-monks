@@ -22,7 +22,8 @@
           {% if comic.thumbnail %}
             <a href="{{ base }}{{ comic.nr }}">
               <img src="{{ comic.thumbnail_url }}"
-                  border="0" style="float: left; margin: 0px; padding: 8px 15px 8px 8px;" />
+                class="webfeedsFeaturedVisual"
+                border="0" style="float: left; margin: 0px; padding: 8px 15px 8px 8px;" />
             </a>
           {% endif %}
           <h2><a href="{{ base }}{{ comic.nr }}">{{ comic.title }}</a></h2>
