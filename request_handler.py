@@ -26,6 +26,7 @@ pages = [('0', other.ZeroEasterPage),
          ('rss', other.RSSPage),
          ('contact', contact.ContactPage),
          ('istalavond', other.ISTALAVONDPage),
+         ('adventure', other.RedirectPage('https://mymyke7.wix.com/ouradventure')),
          ('.*', other.NotFoundPage)]
 
 app = webapp2.WSGIApplication([('/' + x, y) for (x, y) in pages], debug=True)

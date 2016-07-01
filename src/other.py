@@ -7,7 +7,7 @@ from google.appengine.api import users
 from google.appengine.ext import blobstore
 from google.appengine.ext.webapp.blobstore_handlers import \
     BlobstoreDownloadHandler
-from webapp2 import RequestHandler
+from webapp2 import RequestHandler, redirect
 
 from common import (BrusselsTZ, _get_comic, get_published_comic,
                     get_published_comics, not_found, render_page)
@@ -113,3 +113,11 @@ class ISTALAVONDPage(RequestHandler):
         secs_till_evening = (evening - now).total_seconds()
         template_dict = {'seconds_remaining': int(secs_till_evening)}
         render_page(self, 'istalavond.html', template_dict)
+
+
+def RedirectPage(url):
+    class _RedirectPage(RequestHandler):
+        def get(self):
+            return redirect(url, permanent=True)
+
+    return _RedirectPage
