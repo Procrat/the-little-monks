@@ -14,7 +14,7 @@ else:
     LOC_ = 'http://thelittlemonks.com'
 LOC = LOC_ + '/'
 
-ROOT = os.path.join(os.path.dirname(__file__), '..')
+ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'pages')
 JINJA_ENV = jinja2.Environment(
     loader=jinja2.FileSystemLoader(ROOT),
     extensions=['jinja2.ext.autoescape'],
@@ -115,7 +115,7 @@ def publish_one_more():
 def render_page(req_handler, filename, template_dict=None):
     if template_dict is None:
         template_dict = {}
-    template_path = os.path.join('pages', filename)
+    template_path = filename
     template = JINJA_ENV.get_template(template_path)
     template_dict['base'] = LOC
     req_handler.response.write(template.render(template_dict))
