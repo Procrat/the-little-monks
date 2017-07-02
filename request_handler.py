@@ -15,6 +15,7 @@ import common
 common.ensure_latest_published_exists()
 
 pages = [('0', other.ZeroEasterPage),
+         ('', home.LandingPage),
          ('([0-9]*)', home.MainPage),
          ('comic/(.*)', other.ImageHandler),
          ('thumb/(.*)', other.ThumbnailHandler),

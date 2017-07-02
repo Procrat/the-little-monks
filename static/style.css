@@ -364,3 +364,19 @@ form.contact td input[type=submit] {
     width: auto;
     float: right;
 }
+
+/* Landing page */
+ #newreader {
+    float: left;
+    position: relative;
+	width: 50%;
+	min-width: 300px;
+	text-align: center;
+ }
+ #otherwork {
+	float: left;
+    position: relative;
+	width: 50%;
+	min-width: 300px;
+	text-align: center;
+ }

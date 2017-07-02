@@ -31,3 +31,9 @@ class MainPage(webapp2.RequestHandler):
                'share_url': urllib.quote(LOC + str(nr), ''),
                'share_title': urllib.quote('The Little Monks')}
         render_page(self, 'home.html', dic)
+
+		
+class LandingPage(webapp2.RequestHandler):
+	def get(self):
+		render_page(self,'landing_page.html')
+		
